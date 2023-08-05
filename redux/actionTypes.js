@@ -1,0 +1,2 @@
+export const SET_CURRENT_MONTH = 'SET_CURRENT_MONTH';
+export const SET_CURRENT_YEAR = 'SET_CURRENT_YEAR';
