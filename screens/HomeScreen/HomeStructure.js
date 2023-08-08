@@ -1,22 +1,16 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
-import MonthYearSelectorStructure from '../../components/MonthYearSelector/MonthYearSelectorStructure'; // Adjust the path as needed
-import AddExpenseButtonStructure from '../../components/AddExpenseButton/AddExpenseButtonStructure'
+import { View } from 'react-native';
+import MonthYearSelectorStructure from '../../components/MonthYearSelector/MonthYearSelectorStructure';
+import AddExpenseButtonStructure from '../../components/AddExpenseButton/AddExpenseButtonStructure';
+import ExpenseListStructure from '../../components/ExpenseList/ExpenseListStructure';
 import styles from './HomeStyle';
 
-const HomeStructure = ({ expenses }) => {
+const HomeStructure = () => {
   return (
     <View style={styles.container}>
-      
-      <MonthYearSelectorStructure /> 
-      <FlatList
-        data={expenses}
-        renderItem={({ item }) => (
-          <Text>{item.title} - {item.amount}</Text>
-        )}
-        keyExtractor={(item) => item.id.toString()}
-      />
-      <AddExpenseButtonStructure/>
+      <MonthYearSelectorStructure />
+      <ExpenseListStructure />
+      <AddExpenseButtonStructure />
     </View>
   );
 };

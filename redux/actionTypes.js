@@ -1,2 +1,7 @@
 export const SET_CURRENT_MONTH = 'SET_CURRENT_MONTH';
 export const SET_CURRENT_YEAR = 'SET_CURRENT_YEAR';
+export const SET_TITLE = 'SET_TITLE';
+export const SET_AMOUNT = 'SET_AMOUNT';
+export const SET_IS_RECURRING = 'SET_IS_RECURRING';
+export const SET_EXPENSE_DATE_NR = 'SET_EXPENSE_DATE_NR';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
