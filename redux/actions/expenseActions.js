@@ -1,4 +1,4 @@
-import { SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_EXPENSE_DATE_NR, } from '../actionTypes'; // Adjust the import path based on your folder structure
+import { SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_EXPENSE_DATE_NR, CLEAR_FIELDS, SELECT_FREQUENCY, } from '../actionTypes'; // Adjust the import path based on your folder structure
 
 export const setCurrentMonth = (month) => {
   return {
@@ -51,4 +51,13 @@ export const saveExpensesLocally = (expenses) => ({
   type: 'SAVE_EXPENSES_LOCALLY',
   payload: expenses,
 });
+export const selectFrequency = (frequency) => ({
+  type: SELECT_FREQUENCY,
+  payload: frequency,
+});
+export const clearFields = () => {
+  return {
+    type: CLEAR_FIELDS,
+  };
+};
 

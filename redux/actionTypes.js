@@ -5,3 +5,5 @@ export const SET_AMOUNT = 'SET_AMOUNT';
 export const SET_IS_RECURRING = 'SET_IS_RECURRING';
 export const SET_EXPENSE_DATE_NR = 'SET_EXPENSE_DATE_NR';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const CLEAR_FIELDS = 'CLEAR_FIELDS';
+export const SELECT_FREQUENCY = 'SELECT_FREQUENCY';

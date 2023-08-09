@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setTitle, setAmount, setIsRecurring, addExpense, setExpenseDateNR } from '../../redux/actions/expenseActions';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation from React Navigation
 
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation(); // Initialize the navigation object
   const { title, amount, isRecurring, selectedDateNR } = useSelector(state => state.expense);
 
   const handleTitleChange = text => {
@@ -34,6 +36,15 @@ export const useAddExpenseLogic = () => {
         selectedDateNR, // Pass the selected date
       };
       dispatch(addExpense(newExpense));
+
+      // Clear the fields
+      dispatch(setTitle(''));
+      dispatch(setAmount(''));
+      dispatch(setIsRecurring(false));
+      dispatch(setExpenseDateNR(null));
+
+      // Navigate back
+      navigation.goBack();
     }
   };
 

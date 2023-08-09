@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    // justifyContent: 'flex-end',
   },
   title: {
     fontSize: 24,

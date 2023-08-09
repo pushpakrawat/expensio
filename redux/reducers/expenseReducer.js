@@ -7,6 +7,7 @@ import {
   SET_AMOUNT,
   SET_IS_RECURRING,
   SET_EXPENSE_DATE_NR,
+  SELECT_FREQUENCY,
 } from "../actionTypes";
 
 const currentDate = new Date();
@@ -37,6 +38,7 @@ const initialState = {
   selectedDateNR: null,
   expenses: [],
   date: null,
+  selectedFrequency: 'Monthly',
 };
 
 const expenseReducer = (state = initialState, action) => {
@@ -74,6 +76,7 @@ const expenseReducer = (state = initialState, action) => {
         ...state,
         title: action.payload,
       };
+      
     case SET_AMOUNT:
       console.log("SET_AMOUNT:", action.payload);
       return {
@@ -86,6 +89,13 @@ const expenseReducer = (state = initialState, action) => {
         ...state,
         isRecurring: action.payload,
       };
+    
+    case SELECT_FREQUENCY:
+      console.log("SELECT_FREQUENCY:", action.payload)
+      return {
+        ...state,
+        selectedFrequency: action.payload,
+      };  
     default:
       return state;
   }

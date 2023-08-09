@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    // Your container styles here
+    flex: 1,
   },
-  // Add more styles as needed
+  // Rest of your styles
 });
 
 export default styles;

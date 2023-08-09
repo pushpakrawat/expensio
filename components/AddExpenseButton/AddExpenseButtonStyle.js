@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2e2d2a', // Change to your desired color
     borderRadius: 10, // Rounded edges
     padding: 10,
-    margin: 50,
+    margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
