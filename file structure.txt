@@ -1,0 +1,53 @@
+ExpensioApp
+├── assets
+│   ├── image1.png
+│   ├── image2.png
+│   └── ... (other assets)
+├── components
+│   ├── MonthYearSelector
+│   │   ├── MonthYearSelectorStructure.js
+│   │   ├── MonthYearSelectorStyle.js
+│   │   └── MonthYearSelectorCode.js
+│   ├── ExpenseList
+│   │   ├── ExpenseListStructure.js
+│   │   ├── ExpenseListStyle.js
+│   │   └── ExpenseListCode.js
+│   ├── AddExpenseButton
+│   │   ├── AddExpenseButtonStructure.js
+│   │   ├── AddExpenseButtonStyle.js
+│   │   └── AddExpenseButtonCode.js
+│   ├── ExpenseTypeSelector
+│   │   ├── ExpenseTypeSelectorStructure.js
+│   │   ├── ExpenseTypeSelectorStyle.js
+│   │   └── ExpenseTypeSelectorCode.js
+│   ├── MonthlyDatePicker
+│   │   ├── MonthlyDatePickerStructure.js
+│   │   ├── MonthlyDatePickerStyle.js
+│   │   └── MonthlyDatePickerCode.js
+│   └── DateMonthPicker
+│       ├── DateMonthPickerStructure.js
+│       ├── DateMonthPickerStyle.js
+│       └── DateMonthPickerCode.js
+├── navigation
+│   └── AppNavigator.js
+├── screens
+│   ├── HomeScreen
+│   │   ├── HomeStructure.js
+│   │   ├── HomeStyle.js
+│   │   └── HomeCode.js
+│   ├── AddExpenseScreen
+│   │   ├── AddExpenseStructure.js
+│   │   ├── AddExpenseStyle.js
+│   │   └── AddExpenseCode.js
+│   └── ShowExpenseScreen
+│       ├── ShowExpenseStructure.js
+│       ├── ShowExpenseStyle.js
+│       └── ShowExpenseCode.js
+├── redux
+│   ├── actions
+│   │   └── expenseActions.js
+│   ├── reducers
+│   │   └── expenseReducer.js
+│   ├── store.js
+│   └── actionTypes.js
+└── App.js

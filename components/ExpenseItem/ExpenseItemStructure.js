@@ -4,11 +4,11 @@ import { useExpenseItemLogic } from './ExpenseItemCode'; // Import the logic com
 import styles from './ExpenseItemStyle'; // Import the style
 
 const ExpenseItemStructure = ({ expense }) => {
-  const { title, amount, isRecurring, date, selectedDateNR } = useExpenseItemLogic(expense);
+  const { title, amount, isRecurring, date, expenseDate } = useExpenseItemLogic(expense);
 
   // Format the dates to strings
-  const formattedDate = date.toLocaleDateString();
-  const formattedSelectedDateNR = selectedDateNR ? selectedDateNR.toLocaleDateString() : '';
+  const formattedDate = date ? date.toLocaleDateString() : '';
+  const formattedExpenseDates = expenseDate.map(d => d.toLocaleDateString()).join(', ');
 
   return (
     <View style={styles.container}>
@@ -19,8 +19,8 @@ const ExpenseItemStructure = ({ expense }) => {
         {isRecurring ? 'Recurring' : 'Non-Recurring'}
       </Text>
       <Text style={styles.date}>Created on: {formattedDate}</Text>
-      {selectedDateNR && (
-        <Text style={styles.date}>Due on: {formattedSelectedDateNR}</Text>
+      {expenseDate.length > 0 && (
+        <Text style={styles.date}>Due on: {formattedExpenseDates}</Text>
       )}
     </View>
   );

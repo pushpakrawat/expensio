@@ -5,9 +5,5 @@ import { saveExpensesToLocalStorage } from '../Utills/localStorage'; // Adjust t
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-store.subscribe(() => {
-  const expenses = store.getState().expense.expenses;
-  saveExpensesToLocalStorage(expenses);
-});
 
 export default store;

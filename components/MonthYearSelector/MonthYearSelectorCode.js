@@ -1,66 +1,65 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentMonth, setCurrentYear } from '../../redux/actions/expenseActions';
+import { setCurrentMonthName, setCurrentMonth, setCurrentYear } from '../../redux/actions/expenseActions';
 
 export const useMonthYearSelectorLogic = () => {
   const dispatch = useDispatch();
 
-  const currentMonth = useSelector(state => state.expense.currentMonth);
-  const currentYear = useSelector(state => state.expense.currentYear);
-
   // Array of month names
   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  console.log('Logic - Current Month:', currentMonth);
-  console.log('Logic - Current Year:', currentYear);
+  
+  const currentMonthIndex = useSelector(state => state.expense.currentMonth);
+  const currentYear = useSelector(state => state.expense.currentYear);
+
+  const currentMonth = currentMonthIndex; 
+  const currentMonthName = monthNames[currentMonthIndex - 1]; // Get the month name from the array
+
+  console.log('(MD Selector)currentMonthName:', currentMonthName);
+  console.log('(MD Selector)currentMonth:', currentMonth);
+  console.log('(MD Selector)currentYear:', currentYear);
 
   const handlePrevMonth = () => {
-    const currentMonthIndex = monthNames.indexOf(currentMonth);
-    let newMonthIndex = currentMonthIndex - 1;
+    let newMonth = currentMonthIndex - 1;
     let newYear = currentYear;
-    
-    if (newMonthIndex < 0) {
-      newMonthIndex = monthNames.length - 1;
+
+    if (newMonth < 1) { // Check if the new month is less than 1
+      newMonth = 12; // Set to December
       newYear -= 1;
     }
 
-    const newMonth = monthNames[newMonthIndex];
-    console.log('Logic - New Month:', newMonth);
-    console.log('Logic - New Year:', newYear);
-    
-    dispatch(setCurrentMonth(newMonth));
+    dispatch(setCurrentMonthName(monthNames[newMonth - 1])); // Subtract 1 to get the correct index
+    dispatch(setCurrentMonth(newMonth)); // Dispatch the index
     dispatch(setCurrentYear(newYear));
   };
 
   const handleNextMonth = () => {
-    const currentMonthIndex = monthNames.indexOf(currentMonth);
-    let newMonthIndex = currentMonthIndex + 1;
+    let newMonth = currentMonthIndex + 1;
     let newYear = currentYear;
-    
-    if (newMonthIndex >= monthNames.length) {
-      newMonthIndex = 0;
+
+    if (newMonth > 12) { // Check if the new month is greater than 12
+      newMonth = 1; // Set to January
       newYear += 1;
     }
 
-    const newMonth = monthNames[newMonthIndex];
-    console.log('Logic - New Month:', newMonth);
-    console.log('Logic - New Year:', newYear);
-    
-    dispatch(setCurrentMonth(newMonth));
+    dispatch(setCurrentMonthName(monthNames[newMonth - 1])); // Subtract 1 to get the correct index
+    dispatch(setCurrentMonth(newMonth)); // Dispatch the index
     dispatch(setCurrentYear(newYear));
   };
 
   const handleGoToCurrentMonth = () => {
     const currentDate = new Date();
-    const currentMonthIndex = currentDate.getMonth();
-    const currentMonthName = monthNames[currentMonthIndex];
+    const currentMonthIndex = currentDate.getMonth() + 1; // Start from 1
+    const currentMonth = currentMonthIndex; 
+    const currentMonthName = monthNames[currentMonthIndex - 1];
     const currentYear = currentDate.getFullYear();
-    console.log('Logic - Current Month:', currentMonthName);
-    console.log('Logic - Current Year:', currentYear);
-    dispatch(setCurrentMonth(currentMonthName));
+
+    dispatch(setCurrentMonthName(currentMonthName));
+    dispatch(setCurrentMonth(currentMonth)); // Dispatch the index
     dispatch(setCurrentYear(currentYear));
   };
 
   return {
+    currentMonthName,
     currentMonth,
     currentYear,
     handlePrevMonth,

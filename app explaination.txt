@@ -1,0 +1,26 @@
+I want to create a react native expo add for managing my enpenses. We will name it expensio . We will use local storage to save date. We will implement redux in this. Most important thing is to create components in 3 separate files. One is for the structure. One is for style and one is for coe. We will implement this with every component and screen. These are the screens we need: 	
+1) HomeScreen
+2) AddExpensScreen
+3) ShowExpenseScreen
+
+These are the required components for HomeScreen: 
+1) MonthYearSelector: this will be on top.
+2) ExpenseList: shows all the expenses based on the type and date
+3) AddExpenseButton: This will be on bottom right.
+
+These are the components required for AddExpenseScreen: 
+1) Form to add expense title and date
+2) switch to select if the expense is Recurring or Non-recurring.
+3) Button to submit
+
+These are the components required for Recurring expense: 
+1) ExpenseTypeSelector: daily, weekly, month, yearly and custom
+For weekly, we need a day selector which will be from Mon-Sun.
+For Monthly, we need a component MonthlyDatePicker that gives options 1-31 to select.
+For Yearly, we need a component DateMonthPicker which gives an option to select a date and month. Year selection is not required as it will reflect every year.
+For custom we need a multiple date picker.
+
+Based on the imput please create the necessary files. Make sure all the components and screens have separate files for login, styles and structure. Please write the complete code files.
+
+
+Okay. So the purpose of this app is to help us manage our expenses in daily life. What we want is to be able to add an expense. The expense could be a recurring or non recurring. For non-recurring, we will simply add a date on which it will occur. For recurring, we have multiple options to identify how the expense wil occur. First we will check how frequently it occurs by asking to select daily, weekly, monthly, yearly or custom. Then according to the frequency, the epense will reflect on the HomeScreen. The user would be able to see his whole months expense on home screen. Also, the MonthYearSelector on HomeScreen will show the expenses that will occur in the selected month andyear. 

@@ -6,15 +6,15 @@ import styles from './MonthYearSelectorStyle';
 
 const MonthYearSelectorStructure = () => {
   const {
-    currentMonth,
+    currentMonthName,
     currentYear,
     handlePrevMonth,
     handleNextMonth,
     handleGoToCurrentMonth,
   } = useMonthYearSelectorLogic();
 
-  console.log('Structure - Current Month:', currentMonth);
-  console.log('Structure - Current Year:', currentYear);
+  // console.log('Structure - Current Month:', currentMonth);
+  // console.log('Structure - Current Year:', currentYear);
 
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ const MonthYearSelectorStructure = () => {
       </TouchableOpacity>
 
       <View style={styles.dateContainer}>
-        <Text style={styles.dateText}>{currentMonth} {currentYear}</Text>
+        <Text style={styles.dateText}>{currentMonthName} {currentYear}</Text>
       </View>
 
       <TouchableOpacity onPress={handleNextMonth} style={styles.button}>

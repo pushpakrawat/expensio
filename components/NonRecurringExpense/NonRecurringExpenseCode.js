@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useDispatch, useSelector } from 'react-redux';
-import { setExpenseDateNR } from '../../redux/actions/expenseActions'; // Import the action creator
+import { setExpenseDate } from '../../redux/actions/expenseActions'; // Import the action creator
 
 const NonRecurringExpenseCode = () => {
   const dispatch = useDispatch();
 
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const selectedDate = useSelector(state => state.expense.selectedDateNR); // Get selected date from Redux
+  const selectedDates = useSelector(state => state.expense.expenseDate || []); // Get selected dates from Redux
 
   const showDatepicker = () => {
     setShowDatePicker(true);
@@ -19,8 +19,11 @@ const NonRecurringExpenseCode = () => {
   };
 
   const handleDateChangeAndDispatch = (date) => {
+    console.log("(NR expense)Selected Date:", date);
     hideDatepicker();
-    dispatch(setExpenseDateNR(date)); // Dispatch the selected date to Redux
+    const updatedDates = [...selectedDates, date]; // Add the new date to the existing array
+    console.log("Updated Dates:", updatedDates);
+    dispatch(setExpenseDate(updatedDates)); // Dispatch the updated array of dates to Redux
   };
 
   return (
@@ -31,19 +34,21 @@ const NonRecurringExpenseCode = () => {
 
       {showDatePicker && (
         <DateTimePicker
-          value={selectedDate || new Date()}
+          value={new Date()} // Show current date by default
           mode="date"
           display="default"
           onChange={(event, selectedDate) => {
-            handleDateChangeAndDispatch(selectedDate);
+            if (selectedDate) {
+              handleDateChangeAndDispatch(selectedDate);
+            }
           }}
         />
       )}
 
-      {/* Display the selected date */}
-      {selectedDate && (
-        <Text>Selected Date: {selectedDate.toDateString()}</Text>
-      )}
+      {/* Display the selected dates */}
+      {selectedDates.map((date, index) => (
+        <Text key={index}>Selected Date: {date.toDateString()}</Text>
+      ))}
     </>
   );
 };

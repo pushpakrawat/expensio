@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useRecurringExpenseLogic } from "./RecurringExpenseCode";
 import styles from "./RecurringExpenseStyles";
 import { useSelector, useDispatch } from "react-redux";
 import { selectFrequency } from "../../redux/actions/expenseActions";
-import { selectedFrequency} from '../../redux/reducers/expenseReducer'
+import MonthlyOptionStructure from '../MonthlyOptions/MonthlyOptionStructure';
+import YearlyOptionsStructure from '../YearlyOptions/YearlyOptionsStructure';
+import CustomOptionsStructure from '../CustomOptions/CustomOptionsStructure';
+
 
 const RecurringExpenseStructure = () => {
   const selectedFrequency = useSelector(
@@ -74,6 +76,10 @@ const RecurringExpenseStructure = () => {
           </Text>
         </TouchableOpacity>
       </View>
+
+      {selectedFrequency === "Monthly" && <MonthlyOptionStructure />}
+      {selectedFrequency === "Yearly" && <YearlyOptionsStructure />} 
+      {selectedFrequency === "Custom" && <CustomOptionsStructure />} 
     </View>
   );
 };
