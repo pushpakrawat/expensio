@@ -15,17 +15,13 @@ const useExpenseListCode = () => {
       if (!isRecurring) {
         if (monthIndex === currentMonth && yearIndex === currentYear) {
           return true;
-        }
+        } 
       } else if (selectedFrequency === 'Monthly') {
-        if (yearIndex < currentYear || (yearIndex === currentYear && monthIndex <= currentMonth)) {
+        if (yearIndex > currentYear || (yearIndex === currentYear && monthIndex >= currentMonth)) {
           return true;
-        }
-      } else if (selectedFrequency === 'Monthly'&& isEnding === 'false') {
-
-          return true;
-        
+        }         
       } else if (selectedFrequency === 'Yearly') {
-        if (monthIndex === currentMonth && yearIndex <= currentYear) {
+        if (monthIndex === currentMonth && yearIndex >= currentYear) {
           return true;
         }
       } else if (selectedFrequency === 'Custom') {

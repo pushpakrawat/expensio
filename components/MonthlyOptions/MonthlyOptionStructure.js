@@ -12,18 +12,13 @@ const MonthlyOptionStructure = () => {
     dispatch(setIsEnding(!isEnding));
   };
 
-  const [showDatePicker, setShowDatePicker] = useState(false);
-
   return (
     <View>
       <Text>Select Expense Type:</Text>
       <Switch value={isEnding} onValueChange={toggleIsEnding} />
 
       {isEnding && (
-        <MonthlyOptionCode
-          isEnding={isEnding}
-          showDatePicker={() => setShowDatePicker(true)} // Corrected here
-        />
+        <MonthlyOptionCode isEnding={isEnding} />
       )}
     </View>
   );

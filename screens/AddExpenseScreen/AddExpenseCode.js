@@ -6,7 +6,7 @@ import { getExpensesFromLocalStorage, saveExpensesToLocalStorage } from '../../U
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation(); // Initialize the navigation object
-  const { title, amount, isRecurring, expenseDate, isEnding } = useSelector(state => state.expense);
+  const { title, amount, isRecurring, expenseDate, isEnding, selectedFrequency } = useSelector(state => state.expense);
 
   const generateUniqueId = () => {
     const timestamp = Date.now().toString(36);
@@ -43,6 +43,7 @@ export const useAddExpenseLogic = () => {
         isRecurring,
         expenseDate,
         isEnding,
+        selectedFrequency,
         date: new Date(),
       };
       console.log('handleAddExpense - New Expense:', newExpense);

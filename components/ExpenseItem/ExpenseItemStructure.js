@@ -19,9 +19,6 @@ const ExpenseItemStructure = ({ expense }) => {
         {isRecurring ? 'Recurring' : 'Non-Recurring'}
       </Text>
       <Text style={styles.date}>Created on: {formattedDate}</Text>
-      {expenseDate.length > 0 && (
-        <Text style={styles.date}>Due on: {formattedExpenseDates}</Text>
-      )}
     </View>
   );
 };
