@@ -1,10 +1,9 @@
-import { SET_CURRENT_MONTH_NAME, SET_INITIAL_EXPENSES, SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_IS_ENDING, SET_EXPENSE_DATE, CLEAR_FIELDS, SELECT_FREQUENCY, } from '../actionTypes'; // Adjust the import path based on your folder structure
+import { SET_YEARLY_MONTH, SET_MONTHLY_DATE, SET_CURRENT_MONTH_NAME, SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_IS_ENDING, SET_EXPENSE_DATE, CLEAR_FIELDS, SELECT_FREQUENCY, } from '../actionTypes'; // Adjust the import path based on your folder structure
 
-export const setInitialExpenses = (expenses) => ({
-  type: SET_INITIAL_EXPENSES,
-  payload: expenses,
+export const setYearlyMonth = (monthIndex) => ({
+  type: SET_YEARLY_MONTH,
+  payload: monthIndex,
 });
-
 export const setCurrentMonthName = (monthName) => {
   return {
     type: SET_CURRENT_MONTH_NAME,
@@ -51,6 +50,10 @@ export const setExpenseDate = (date) => {
     payload: date,
   };
 };
+export const setMonthlyDate = (date) => ({
+  type: SET_MONTHLY_DATE,
+  payload: date,
+});
 
 export const saveExpensesLocally = (expenses) => ({
   type: 'SAVE_EXPENSES_LOCALLY',

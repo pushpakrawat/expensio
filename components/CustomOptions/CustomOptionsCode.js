@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useDispatch, useSelector } from 'react-redux';
-import { setExpenseDate } from '../../redux/actions/expenseActions';
+import { setExpenseDate, setIsEnding, setIsRecurring } from '../../redux/actions/expenseActions';
 
 const CustomOptionsCode = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,7 @@ const CustomOptionsCode = () => {
   const handleDateChangeAndDispatch = (date) => {
     const updatedDates = [...selectedDates, date]; // Add new date to the array
     dispatch(setExpenseDate(updatedDates));
+    dispatch(setIsEnding(true));
     setShowDatePicker(false); // Close the date picker
   };
 

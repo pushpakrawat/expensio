@@ -1,8 +1,4 @@
 import {
-  saveExpensesToLocalStorage,
-  getExpensesFromLocalStorage,
-} from "../../Utills/localStorage";
-import {
   SET_CURRENT_MONTH_NAME,
   SET_CURRENT_MONTH,
   SET_CURRENT_YEAR,
@@ -11,10 +7,15 @@ import {
   SET_AMOUNT,
   SET_IS_RECURRING,
   SET_IS_ENDING,
+  SET_YEARLY_MONTH,
   SET_EXPENSE_DATE,
+  SET_MONTHLY_DATE,
   SELECT_FREQUENCY,
-  SET_INITIAL_EXPENSES,
 } from "../actionTypes";
+import {
+  addExpensesToStorage,
+  retrieveExpensesFromStorage,
+} from "../../Utills/storage";
 
 const currentDate = new Date();
 const initialMonth = currentDate.getMonth() + 1;
@@ -30,18 +31,17 @@ const initialState = {
   isRecurring: false,
   isEnding: false,
   expenseDate: [],
+  monthlyDate: "",
+  yearlyMonth: 0,
   date: null,
   selectedFrequency: "",
 };
 
+expenses = retrieveExpensesFromStorage();
+console.log(expenses);
+
 const expenseReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_INITIAL_EXPENSES:
-      return {
-        ...state,
-        expenses: action.payload,
-      };
-
     case SET_CURRENT_MONTH_NAME:
       console.log("(REDUCER)SET_CURRENT_MONTH_NAME:", action.payload);
       return {
@@ -88,12 +88,23 @@ const expenseReducer = (state = initialState, action) => {
         ...state,
         isEnding: action.payload,
       };
+    case SET_YEARLY_MONTH:
+      return {
+        ...state,
+        yearlyMonth: action.payload,
+      };
 
     case SET_EXPENSE_DATE:
       console.log("(REDUCER)SET_EXPENSE_DATE:", action.payload);
       return {
         ...state,
         expenseDate: [...action.payload], // Create a new array instance
+      };
+    case SET_MONTHLY_DATE:
+      console.log("(REDUCER)SET_MONTHLY_DATE:", action.payload);
+      return {
+        ...state,
+        monthlyDate: action.payload,
       };
 
     case SELECT_FREQUENCY:
@@ -104,10 +115,9 @@ const expenseReducer = (state = initialState, action) => {
       };
 
     case ADD_EXPENSE:
-      console.log("(reducer)This new expense will be added:", action.payload);
       const newExpenses = [...state.expenses, action.payload];
-      console.log("(reducer)This will be the updated:", newExpenses);
-      // saveExpensesToLocalStorage(newExpenses);
+      addExpensesToStorage(newExpenses);
+
       return {
         ...state,
         expenses: newExpenses,

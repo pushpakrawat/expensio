@@ -1,15 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, Switch, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native'; // Import navigation functions
 import styles from './AddExpenseStyle';
 import { useAddExpenseLogic } from './AddExpenseCode'; // Remove unnecessary import
 import NonRecurringExpenseStructure from '../../components/NonRecurringExpense/NonRecurringExpenseStructure';
 import RecurringExpenseStructure from '../../components/RecurringExpense/RecurringExpenseStructure';
 
 const AddExpenseStructure = () => {
-  const dispatch = useDispatch();
-  const navigation = useNavigation(); 
 
   // Destructure values and functions from the logic hook
   const {

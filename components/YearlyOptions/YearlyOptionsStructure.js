@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, Switch } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 import YearlyOptionsCode from './YearlyOptionsCode';
 import { setIsEnding } from '../../redux/actions/expenseActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const YearlyOptionsStructure = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const YearlyOptionsStructure = () => {
       <Text>Select Expense Type:</Text>
       <Switch value={isEnding} onValueChange={toggleIsEnding} />
 
-      {isEnding && (
+      {!isEnding && (
         <YearlyOptionsCode isEnding={isEnding} />
       )}
     </View>

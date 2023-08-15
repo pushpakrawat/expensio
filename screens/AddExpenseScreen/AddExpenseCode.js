@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setTitle, setAmount, setIsRecurring, setIsEnding, addExpense, setExpenseDate } from '../../redux/actions/expenseActions';
+import { setTitle, setAmount, setIsRecurring, setIsEnding, addExpense, setExpenseDate, setMonthlyDate } from '../../redux/actions/expenseActions';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation from React Navigation
-import { getExpensesFromLocalStorage, saveExpensesToLocalStorage } from '../../Utills/localStorage';
+
 
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation(); // Initialize the navigation object
-  const { title, amount, isRecurring, expenseDate, isEnding, selectedFrequency } = useSelector(state => state.expense);
+  const { title, amount, isRecurring, expenseDate, isEnding, selectedFrequency, monthlyDate } = useSelector(state => state.expense);
 
   const generateUniqueId = () => {
     const timestamp = Date.now().toString(36);
@@ -42,11 +42,12 @@ export const useAddExpenseLogic = () => {
         amount: parseFloat(amount),
         isRecurring,
         expenseDate,
+        monthlyDate,
         isEnding,
         selectedFrequency,
         date: new Date(),
       };
-      console.log('handleAddExpense - New Expense:', newExpense);
+      // console.log('handleAddExpense - New Expense:', newExpense);
       dispatch(addExpense(newExpense));
 
       // Clear the fields
@@ -55,6 +56,7 @@ export const useAddExpenseLogic = () => {
       dispatch(setIsRecurring(false));
       dispatch(setIsEnding(false));
       dispatch(setExpenseDate([]));   
+      dispatch(setMonthlyDate(""));   
 
       // Navigate back
       navigation.goBack();

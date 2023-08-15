@@ -15,11 +15,8 @@ const MonthlyOptionStructure = () => {
   return (
     <View>
       <Text>Select Expense Type:</Text>
-      <Switch value={isEnding} onValueChange={toggleIsEnding} />
-
-      {isEnding && (
-        <MonthlyOptionCode isEnding={isEnding} />
-      )}
+      <Switch value={isEnding} onValueChange={toggleIsEnding} />      
+        <MonthlyOptionCode isEnding={isEnding} />      
     </View>
   );
 };
