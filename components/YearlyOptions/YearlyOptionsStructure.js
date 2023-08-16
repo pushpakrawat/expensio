@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, Switch } from 'react-native';
-import YearlyOptionsCode from './YearlyOptionsCode';
+import DateMonthYearPicker from '../smallComponents/DateMonthYearPicker';
+import DateSelector from '../smallComponents/DateSelector';
+import MonthSelector from '../smallComponents/MonthSelector';
 import { setIsEnding } from '../../redux/actions/expenseActions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,12 +16,13 @@ const YearlyOptionsStructure = () => {
 
   return (
     <View>
-      <Text>Select Expense Type:</Text>
+      <Text>Select Date:</Text>
+      <DateSelector/>
+      <Text>Select Month:</Text>
+      <MonthSelector/>
+      <Text>Is Ending:</Text>
       <Switch value={isEnding} onValueChange={toggleIsEnding} />
-
-      {!isEnding && (
-        <YearlyOptionsCode isEnding={isEnding} />
-      )}
+      <DateMonthYearPicker/>
     </View>
   );
 };

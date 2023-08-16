@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import CustomOptionsCode from './CustomOptionsCode';
+import React from 'react';
+import { View } from 'react-native';
+
+import DateMonthYearPicker from '../smallComponents/DateMonthYearPicker';
 
 const CustomOptionsStructure = () => {
-  const [showDatePicker, setShowDatePicker] = useState(false);
-
-  const toggleDatePicker = () => {
-    setShowDatePicker(!showDatePicker);
-  };
-
   return (
     <View>
-      <Text>Select Expense Type:</Text>
-      
-      <CustomOptionsCode showDatePicker={toggleDatePicker} />
-      
-      {/* Render the date picker when showDatePicker is true */}
-      {showDatePicker && <CustomOptionsCode showDatePicker={toggleDatePicker} />}
+      <DateMonthYearPicker/>  
     </View>
   );
 };

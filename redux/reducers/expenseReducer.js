@@ -37,8 +37,6 @@ const initialState = {
   selectedFrequency: "",
 };
 
-expenses = retrieveExpensesFromStorage();
-console.log(expenses);
 
 const expenseReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -116,7 +114,7 @@ const expenseReducer = (state = initialState, action) => {
 
     case ADD_EXPENSE:
       const newExpenses = [...state.expenses, action.payload];
-      addExpensesToStorage(newExpenses);
+      // addExpensesToStorage(newExpenses);
 
       return {
         ...state,

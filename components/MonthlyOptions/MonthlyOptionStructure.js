@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, Switch } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import MonthlyOptionCode from './MonthlyOptionCode';
+import DateMonthYearPicker from '../smallComponents/DateMonthYearPicker';
+import DateSelector from '../smallComponents/DateSelector';
 import { setIsEnding } from '../../redux/actions/expenseActions';
 
 const MonthlyOptionStructure = () => {
@@ -14,9 +15,10 @@ const MonthlyOptionStructure = () => {
 
   return (
     <View>
-      <Text>Select Expense Type:</Text>
-      <Switch value={isEnding} onValueChange={toggleIsEnding} />      
-        <MonthlyOptionCode isEnding={isEnding} />      
+      <DateSelector/>   
+      <Text>Set an end date:</Text>
+      <Switch value={isEnding} onValueChange={toggleIsEnding} />
+      <DateMonthYearPicker/>      
     </View>
   );
 };

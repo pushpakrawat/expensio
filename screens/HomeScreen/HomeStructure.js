@@ -4,8 +4,10 @@ import MonthYearSelectorStructure from '../../components/MonthYearSelector/Month
 import AddExpenseButtonStructure from '../../components/AddExpenseButton/AddExpenseButtonStructure';
 import ExpenseListStructure from '../../components/ExpenseList/ExpenseListStructure';
 import styles from './HomeStyle';
+import HomeCode from './HomeCode';
 
 const HomeStructure = () => {
+  
   return (
     <View style={styles.container}>
       <MonthYearSelectorStructure />
