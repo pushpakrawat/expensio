@@ -7,11 +7,13 @@ import {
   SET_AMOUNT,
   SET_IS_RECURRING,
   SET_IS_ENDING,
+  SET_IS_CUSTOM,
   SET_YEARLY_MONTH,
   SET_EXPENSE_DATE,
   SET_MONTHLY_DATE,
   SELECT_FREQUENCY,
 } from "../actionTypes";
+
 import {
   addExpensesToStorage,
   retrieveExpensesFromStorage,
@@ -30,6 +32,7 @@ const initialState = {
   amount: "",
   isRecurring: false,
   isEnding: false,
+  isCustom: false,
   expenseDate: [],
   monthlyDate: "",
   yearlyMonth: 0,
@@ -86,6 +89,14 @@ const expenseReducer = (state = initialState, action) => {
         ...state,
         isEnding: action.payload,
       };
+
+    case SET_IS_CUSTOM:
+      console.log("(REDUCER)SET_IS_CUSTOM:", action.payload);
+      return {
+        ...state,
+        isCustom: action.payload,
+      };
+
     case SET_YEARLY_MONTH:
       return {
         ...state,

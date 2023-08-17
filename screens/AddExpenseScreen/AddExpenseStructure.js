@@ -18,6 +18,10 @@ const AddExpenseStructure = () => {
     isRecurring,
   } = useAddExpenseLogic(); // Remove unnecessary argument
 
+  const handleIsCustom = (option)=> {
+    dispatch(setIsCustom(option));
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add Expense</Text>
@@ -43,7 +47,7 @@ const AddExpenseStructure = () => {
       {isRecurring ? (
         <RecurringExpenseStructure />
       ) : (
-        <NonRecurringExpenseStructure />
+        <NonRecurringExpenseStructure onPress= {()=>handleIsCustom(false)}/>
       )}
 
       <TouchableOpacity style={styles.button} onPress={handleAddExpense}>

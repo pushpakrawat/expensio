@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./RecurringExpenseStyles";
 import { useSelector, useDispatch } from "react-redux";
-import { selectFrequency, setIsEnding } from "../../redux/actions/expenseActions";
+import { selectFrequency, setIsEnding, setIsCustom } from "../../redux/actions/expenseActions";
 import MonthlyOptionStructure from '../MonthlyOptions/MonthlyOptionStructure';
 import YearlyOptionsStructure from '../YearlyOptions/YearlyOptionsStructure';
 import CustomOptionsStructure from '../CustomOptions/CustomOptionsStructure';
@@ -25,6 +25,10 @@ const RecurringExpenseStructure = () => {
   const toggleIsEnding = () => {
     dispatch(setIsEnding(!isEnding));
   };
+  
+  const handleIsCustom = (option)=> {
+    dispatch(setIsCustom(option));
+  }
 
   return (
     <View style={styles.container}>
@@ -35,7 +39,7 @@ const RecurringExpenseStructure = () => {
             styles.optionButton,
             selectedFrequency === "Monthly" ? styles.selectedOption : null,
           ]}
-          onPress={() => handleFrequencySelect("Monthly")}
+          onPress={() => { handleFrequencySelect("Monthly"); handleIsCustom(false)}}
         >
           <Text
             style={[
@@ -54,7 +58,7 @@ const RecurringExpenseStructure = () => {
             styles.optionButton,
             selectedFrequency === "Yearly" ? styles.selectedOption : null,
           ]}
-          onPress={() => handleFrequencySelect("Yearly")}
+          onPress={() => { handleFrequencySelect("Yearly"); handleIsCustom(false) }}
         >
           <Text
             style={[
@@ -71,7 +75,7 @@ const RecurringExpenseStructure = () => {
             styles.optionButton,
             selectedFrequency === "Custom" ? styles.selectedOption : null,
           ]}
-          onPress={() => handleFrequencySelect("Custom")}
+          onPress={() => {handleFrequencySelect("Custom"); handleIsCustom(true)}}
         >
           <Text
             style={[
@@ -86,7 +90,7 @@ const RecurringExpenseStructure = () => {
 
       {selectedFrequency === "Monthly" && <MonthlyOptionStructure />}
       {selectedFrequency === "Yearly" && <YearlyOptionsStructure />} 
-      {selectedFrequency === "Custom" && <CustomOptionsStructure onPress= {()=>toggleIsEnding()}/>} 
+      {selectedFrequency === "Custom" && <CustomOptionsStructure onPress= {()=> toggleIsEnding()}/>} 
     </View>
   );
 };

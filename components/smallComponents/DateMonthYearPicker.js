@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity,} from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import {setExpenseDate} from "../../redux/actions/expenseActions";
+import { setExpenseDate } from "../../redux/actions/expenseActions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function DateMonthYearPicker() {
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   const selectedDates = useSelector((state) => state.expense.expenseDate || []);
   const isEnding = useSelector((state) => state.expense.isEnding);
+  const isCustom = useSelector((state) => state.expense.isCustom);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleDateChangeAndDispatch = (date) => {
-    const updatedDates = [date, ...selectedDates.slice(1)]; // Replace the first element of the array
-    dispatch(setExpenseDate(updatedDates));
-    setShowDatePicker(false); // Close the date picker
+    if (isCustom) {
+      const updatedDates = [date, ...selectedDates];
+      dispatch(setExpenseDate(updatedDates));
+    } else {
+      const updatedDates = [date];
+      dispatch(setExpenseDate(updatedDates));
+    }
+    setShowDatePicker(false);
   };
 
   return (
@@ -38,7 +44,10 @@ export default function DateMonthYearPicker() {
       )}
 
       {selectedDates.length > 0 && (
-        <Text>Selected Date(s): {selectedDates[0].toDateString()}</Text>
+        <Text>
+          Selected Date(s):
+          {selectedDates.map((date) => date.toDateString()).join(", ")}
+        </Text>
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import styles from './NonRecurringExpenseStyle'; 
+// import styles from './NonRecurringExpenseStyle'; 
 import { setIsEnding } from '../../redux/actions/expenseActions';
 import DateMonthYearPicker from '../smallComponents/DateMonthYearPicker';
 

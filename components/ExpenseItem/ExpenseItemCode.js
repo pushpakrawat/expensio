@@ -38,7 +38,7 @@ export const useExpenseItemLogic = (expense) => {
     });
 
   // Extract the dueDate value
-  const dueDate = parsedDates.map((parsedDate, index) => parsedDate.toString());
+  const dueDate = parsedDates.map((parsedDate, index) => parsedDate.toString()).join(", ");
 
   return {
     title: expense.title,

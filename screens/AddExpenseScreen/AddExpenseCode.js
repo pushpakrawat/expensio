@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'; // Import useNavigatio
 
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation(); // Initialize the navigation object
+  const navigation = useNavigation(); 
   const { title, amount, isRecurring, expenseDate, isEnding, selectedFrequency, monthlyDate } = useSelector(state => state.expense);
 
   const generateUniqueId = () => {
