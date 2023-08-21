@@ -1,4 +1,4 @@
-import { SET_YEARLY_MONTH, SET_MONTHLY_DATE, SET_CURRENT_MONTH_NAME, SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_IS_ENDING, SET_IS_CUSTOM, SET_EXPENSE_DATE, CLEAR_FIELDS, SELECT_FREQUENCY, } from '../actionTypes'; // Adjust the import path based on your folder structure
+import { SET_YEARLY_MONTH, SET_MONTHLY_DATE, SET_CURRENT_MONTH_NAME, SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_EXPENSE_DATE, CLEAR_FIELDS, SELECT_FREQUENCY,SET_SELECTED_YEAR } from '../actionTypes'; // Adjust the import path based on your folder structure
 
 export const setYearlyMonth = (monthIndex) => ({
   type: SET_YEARLY_MONTH,
@@ -39,16 +39,6 @@ export const setIsRecurring = (isRecurring) => ({
   payload: isRecurring,
 });
 
-export const setIsEnding = (isEnding) => ({
-  type: SET_IS_ENDING,
-  payload: isEnding,
-});
-
-export const setIsCustom = (isCustom) => ({
-  type: SET_IS_CUSTOM,
-  payload: isCustom,
-});
-
 export const setExpenseDate = (date) => {
   return {
     type: SET_EXPENSE_DATE,
@@ -58,6 +48,11 @@ export const setExpenseDate = (date) => {
 export const setMonthlyDate = (date) => ({
   type: SET_MONTHLY_DATE,
   payload: date,
+});
+
+export const setSelectedYear = (year) => ({
+  type: SET_SELECTED_YEAR,
+  payload: year,
 });
 
 export const saveExpensesLocally = (expenses) => ({

@@ -1,26 +1,27 @@
-import React from 'react';
-import { View, Text, TextInput, Switch, TouchableOpacity } from 'react-native';
-import styles from './AddExpenseStyle';
-import { useAddExpenseLogic } from './AddExpenseCode'; // Remove unnecessary import
-import NonRecurringExpenseStructure from '../../components/NonRecurringExpense/NonRecurringExpenseStructure';
-import RecurringExpenseStructure from '../../components/RecurringExpense/RecurringExpenseStructure';
+import React from "react";
+import { View, Text, TextInput, Switch, TouchableOpacity, Button } from "react-native";
+import styles from "./AddExpenseStyle";
+import { useAddExpenseLogic } from "./AddExpenseCode"; // Remove unnecessary import
+import { useDispatch, useSelector } from "react-redux";
+import { setIsRecurring } from "../../redux/actions/expenseActions";
+import NonRecurringExpenseStructure from "../../components/NonRecurringExpense/NonRecurringExpenseStructure";
+import RecurringExpenseStructure from "../../components/RecurringExpense/RecurringExpenseStructure";
 
 const AddExpenseStructure = () => {
-
+  const dispatch = useDispatch();
+  const isRecurring = useSelector(state => state.expense.isRecurring);
   // Destructure values and functions from the logic hook
   const {
     handleAddExpense,
     handleTitleChange,
     handleAmountChange,
-    handleToggleIsRecurring, // Update function name
     title,
     amount,
-    isRecurring,
   } = useAddExpenseLogic(); // Remove unnecessary argument
 
-  const handleIsCustom = (option)=> {
+  const handleIsCustom = (option) => {
     dispatch(setIsCustom(option));
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -38,21 +39,17 @@ const AddExpenseStructure = () => {
         onChangeText={handleAmountChange}
         value={amount}
       />
-      <View style={styles.switchContainer}>
-        <Text style={styles.switchLabel}>Recurring</Text>
-        <Switch value={isRecurring} onValueChange={handleToggleIsRecurring} /> 
+
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} title="Recurring" onPress={()=> dispatch(setIsRecurring(true))} />
+        <Button style={styles.button} title="One Time" onPress={()=> dispatch(setIsRecurring(false))} />
+        
       </View>
 
-      
-      {isRecurring ? (
-        <RecurringExpenseStructure />
-      ) : (
-        <NonRecurringExpenseStructure onPress= {()=>handleIsCustom(false)}/>
-      )}
+      {isRecurring ? ( < RecurringExpenseStructure />) : ( <NonRecurringExpenseStructure /> )}
 
-      <TouchableOpacity style={styles.button} onPress={handleAddExpense}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+      <Button style={styles.button} title="Submit" onPress={()=> handleAddExpense()} />
+
     </View>
   );
 };

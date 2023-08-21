@@ -11,7 +11,7 @@ export default function MonthSelector() {
   const isEnding = useSelector((state) => state.expense.isEnding);
 
   const handleYearlyMonthSelect = (monthIndex) => {
-    dispatch(setYearlyMonth(monthIndex));
+    dispatch(setYearlyMonth(monthIndex+1));
   };
 
   const getMonthName = (monthIndex) => {

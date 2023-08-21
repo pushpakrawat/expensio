@@ -10,6 +10,7 @@ const App = () => {
     <Provider store={store}>
       {/* { clearStorage()} */}
       <AppNavigator />
+      
     </Provider>
   );
 };

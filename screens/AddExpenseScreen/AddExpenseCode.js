@@ -6,7 +6,9 @@ import { useNavigation } from '@react-navigation/native'; // Import useNavigatio
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation(); 
-  const { title, amount, isRecurring, expenseDate, isEnding, selectedFrequency, monthlyDate } = useSelector(state => state.expense);
+  const { title, amount, isRecurring, expenseEndDate, selectedFrequency,selectedDate, selectedMonth, selectedYear } = useSelector(state => state.expense);
+
+
 
   const generateUniqueId = () => {
     const timestamp = Date.now().toString(36);
@@ -24,10 +26,6 @@ export const useAddExpenseLogic = () => {
     dispatch(setAmount(text));
   };
 
-  const handleToggleIsRecurring = () => {
-    console.log('handleToggleIsRecurring:', !isRecurring);
-    dispatch(setIsRecurring(!isRecurring));
-  };
 
   const handleDateChange = date => {
     console.log('handleDateChange:', date);
@@ -35,17 +33,19 @@ export const useAddExpenseLogic = () => {
   };
 
   const handleAddExpense = () => {
-    if (title && amount && expenseDate) { // Make sure a date is selected
+    if (title && amount ) { // Make sure a date is selected
       const newExpense = {
+        date: new Date(),
         id: generateUniqueId(), // Generate a unique id
         title,
         amount: parseFloat(amount),
         isRecurring,
-        expenseDate,
-        monthlyDate,
-        isEnding,
         selectedFrequency,
-        date: new Date(),
+        selectedDate,
+        selectedMonth,
+        selectedYear,
+        expenseEndDate,
+
       };
       // console.log('handleAddExpense - New Expense:', newExpense);
       dispatch(addExpense(newExpense));
@@ -53,10 +53,9 @@ export const useAddExpenseLogic = () => {
       // Clear the fields
       dispatch(setTitle(''));
       dispatch(setAmount(''));
-      dispatch(setIsRecurring(false));
-      dispatch(setIsEnding(false));
-      dispatch(setExpenseDate([]));   
+      dispatch(setIsRecurring(''));
       dispatch(setMonthlyDate(""));   
+      dispatch(setExpenseDate(""));   
 
       // Navigate back
       navigation.goBack();
@@ -67,11 +66,10 @@ export const useAddExpenseLogic = () => {
     handleAddExpense,
     handleTitleChange,
     handleAmountChange,
-    handleToggleIsRecurring,
     handleDateChange,
     title,
     amount,
     isRecurring,
-    expenseDate,
+    expenseEndDate,
   };
 };

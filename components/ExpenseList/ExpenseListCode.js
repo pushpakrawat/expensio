@@ -5,54 +5,35 @@ const useExpenseListCode = () => {
   const currentMonth = useSelector(state => state.expense.currentMonth);
   const currentYear = useSelector(state => state.expense.currentYear);
   
-
   const filteredExpenses = expenses.filter(expense => {
-    const { expenseDate, selectedFrequency, isRecurring, date, isEnding } = expense;
+    const { expenseEndDate, selectedFrequency, isRecurring, selectedMonth, selectedYear } = expense;
+    console.log('EL - Selected Month', selectedMonth);
+    console.log('EL - Selected Year', selectedYear);
 
-    const additionMonth = date.getMonth() + 1;
-    const additionYear = date.getFullYear();
+    const endMonth = expenseEndDate ? expenseEndDate.getMonth() + 1 : null;
+    console.log('EL - End Month', endMonth)
+    const endYear = expenseEndDate ? expenseEndDate.getFullYear() : null;
+    console.log('EL - End Year', endYear)
 
-    if (!isEnding) {
-      if (selectedFrequency === 'Monthly') {
-        console.log('addition date of non-ending', additionMonth, additionYear)
-        if (additionYear < currentYear || (additionYear === currentYear && additionMonth <= currentMonth)) {
-        return true;          
-        }
-      } else if (selectedFrequency === 'Yearly') {
-        console.log('addition date of non-ending', additionMonth, additionYear)
-        if ((additionYear < currentYear && additionMonth === currentMonth) || (additionYear === currentYear && additionMonth === currentMonth)) {
-        return true;          
-        }
+    if (!isRecurring) {
+      if (endMonth === currentMonth && endYear === currentYear) {
+        return true;
+      }
+    } else {
+      if (
+        (!expenseEndDate || (endYear > currentYear && selectedYear < currentYear) ||
+        (selectedYear === currentYear && selectedMonth <= currentMonth) ||
+        (endYear === currentYear && endMonth >= currentMonth))
+      ) {
+        const a = (currentYear - selectedYear) * 12;
+        const b = currentMonth - selectedMonth;
+        const x = (a + b) % selectedFrequency;
+    
+        return x === 0;
       }
     }
-
-    for (const expenseDateItem of expenseDate) {
-      const monthIndex = expenseDateItem.getMonth() + 1;
-      const yearIndex = expenseDateItem.getFullYear();
-
-      if (!isRecurring) {
-        if (monthIndex === currentMonth && yearIndex === currentYear) {
-          return true;
-        }
-      } else if (selectedFrequency === 'Monthly') {
-       if (
-          (yearIndex > currentYear && additionYear < currentYear) ||
-          (additionYear === currentYear && additionMonth <= currentMonth) ||
-          (yearIndex === currentYear && monthIndex >= currentMonth)
-        ) {
-          return true;
-        }
-      } else if (selectedFrequency === 'Yearly') {
-        if ((monthIndex === currentMonth && yearIndex >= currentYear && additionYear < currentYear) ||(additionYear === currentYear && additionMonth <= currentMonth)) {
-          return true;
-        }
-      } else if (selectedFrequency === 'Custom') {
-        if (monthIndex === currentMonth && yearIndex === currentYear) {
-          return true;
-        }
-      }
-    }
-
+  
+    
     return false;
   });
 

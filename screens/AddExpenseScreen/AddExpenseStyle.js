@@ -27,11 +27,13 @@ const styles = StyleSheet.create({
   switchLabel: {
     marginRight: 8,
   },
+  buttonContainer:{
+    
+
+  },
   button: {
-    backgroundColor: 'blue',
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
+    
+    
   },
   buttonText: {
     color: 'white',

@@ -4,7 +4,7 @@ import { useExpenseItemLogic } from './ExpenseItemCode';
 import styles from './ExpenseItemStyle'; // Make sure to import your styles
 
 const ExpenseItemStructure = ({ expense }) => {
-  const { title, amount, isRecurring, formattedDate, dueDate } = useExpenseItemLogic(expense);
+  const { title, amount, isRecurring, formattedDate, formattedDueDate } = useExpenseItemLogic(expense);
 
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ const ExpenseItemStructure = ({ expense }) => {
         {isRecurring ? 'Recurring' : 'Non-Recurring'}
       </Text>
       <Text style={styles.date}>Created on: {formattedDate}</Text>
-      <Text>Due date: {dueDate}</Text>
+      <Text>Due date: {formattedDueDate}</Text>
     </View>
   );
 };
