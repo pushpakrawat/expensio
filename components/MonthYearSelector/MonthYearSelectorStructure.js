@@ -19,7 +19,7 @@ const MonthYearSelectorStructure = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePrevMonth} style={styles.button}>
-        <AntDesign name="left" size={24} color="white" />
+        <AntDesign name="left" size={20} color="#f5d442" />
       </TouchableOpacity>
 
       <View style={styles.dateContainer}>
@@ -27,11 +27,11 @@ const MonthYearSelectorStructure = () => {
       </View>
 
       <TouchableOpacity onPress={handleNextMonth} style={styles.button}>
-        <AntDesign name="right" size={24} color="white" />
+        <AntDesign name="right" size={20} color="#f5d442" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleGoToCurrentMonth} style={styles.goToCurrentButton}>
-        <AntDesign name="arrowleft" size={24} color="white" />
+        <AntDesign name="arrowleft" size={20} color="#f5d442" />
       </TouchableOpacity>
     </View>
   );

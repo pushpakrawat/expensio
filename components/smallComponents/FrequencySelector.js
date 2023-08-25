@@ -5,14 +5,14 @@ import { selectFrequency } from '../../redux/actions/expenseActions'; // Import 
 
 const FrequencySelector = () => {
   const dispatch = useDispatch();
-  const selectedFrequencyIndex = useSelector(state => state.selectedFrequencyIndex); // Replace with your Redux state selector
+  const selectedFrequencyIndex = useSelector(state => state.expense.selectedFrequency) - 1; // Replace with your Redux state selector
 
   const handleFrequencySelection = (index) => {
-    dispatch(selectFrequency(index+1)); // Dispatch your Redux action to update the selected frequency index
+    dispatch(selectFrequency(index + 1)); // Dispatch your Redux action to update the selected frequency index
   };
 
   const renderFrequencyButtons = () => {
-    const frequencies = ['1 month', '2 months', '3 months', '4 months', '5 months', '6 months', '7 months', '8 months', '9 months', '10 months', '11 months', '12 months'];
+    const frequencies = ['1 month', '2 months', '3 months', '4 months', '5 months', '6 months', '7 months', '8 months', '9 months', '10 months', '11 months', 'Yearly'];
 
     return frequencies.map((frequency, index) => (
       <TouchableOpacity
@@ -23,15 +23,18 @@ const FrequencySelector = () => {
         ]}
         onPress={() => handleFrequencySelection(index)}
       >
-        <Text style={styles.buttonText}>{frequency}</Text>
+        <Text style={[styles.buttonText, selectedFrequencyIndex === index && styles.selectedButtonText]}>{frequency}</Text>
       </TouchableOpacity>
     ));
   };
 
   return (
+    <>
+    <Text style={{ margin: 5 }}> Select Occurence </Text>
     <ScrollView horizontal contentContainerStyle={styles.container}>
       {renderFrequencyButtons()}
     </ScrollView>
+    </>
   );
 };
 
@@ -44,17 +47,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginHorizontal: 5,
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 5,
+    backgroundColor: 'white',
   },
   selectedFrequencyButton: {
-    backgroundColor: '#007bff',
-    borderColor: '#007bff',
+    backgroundColor: '#42b3f5',
+    borderColor: 'grey',
   },
   buttonText: {
     color: 'black',
     fontSize: 16,
+  },
+  selectedButtonText: {
+    color: 'white', // Change the text color to white when selected
   },
 });
 

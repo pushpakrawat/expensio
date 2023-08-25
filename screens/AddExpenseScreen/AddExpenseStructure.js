@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, TextInput, Switch, TouchableOpacity, Button } from "react-native";
+import { View, Text, TextInput, Switch, TouchableOpacity, Button, ScrollView } from "react-native"; // Import ScrollView
 import styles from "./AddExpenseStyle";
-import { useAddExpenseLogic } from "./AddExpenseCode"; // Remove unnecessary import
+import { useAddExpenseLogic } from "./AddExpenseCode";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsRecurring } from "../../redux/actions/expenseActions";
 import NonRecurringExpenseStructure from "../../components/NonRecurringExpense/NonRecurringExpenseStructure";
@@ -10,47 +10,62 @@ import RecurringExpenseStructure from "../../components/RecurringExpense/Recurri
 const AddExpenseStructure = () => {
   const dispatch = useDispatch();
   const isRecurring = useSelector(state => state.expense.isRecurring);
-  // Destructure values and functions from the logic hook
   const {
     handleAddExpense,
     handleTitleChange,
     handleAmountChange,
     title,
     amount,
-  } = useAddExpenseLogic(); // Remove unnecessary argument
-
-  const handleIsCustom = (option) => {
-    dispatch(setIsCustom(option));
-  };
+  } = useAddExpenseLogic();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Add Expense</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Title"
-        onChangeText={handleTitleChange}
-        value={title}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Amount"
-        keyboardType="numeric"
-        onChangeText={handleAmountChange}
-        value={amount}
-      />
+    <ScrollView contentContainerStyle={styles.scrollContainer}> 
+      <View style={styles.container}>
+        <Text style={styles.title}>Add Expense</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Title"
+          onChangeText={handleTitleChange}
+          value={title}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Amount"
+          keyboardType="numeric"
+          onChangeText={handleAmountChange}
+          value={amount}
+        />
 
-      <View style={styles.buttonContainer}>
-        <Button style={styles.button} title="Recurring" onPress={()=> dispatch(setIsRecurring(true))} />
-        <Button style={styles.button} title="One Time" onPress={()=> dispatch(setIsRecurring(false))} />
-        
+        <View style={styles.buttonContainer}>
+          <View style={styles.buttonWrapper}>
+            <Button
+              color="#42b3f5"
+              style={styles.button}
+              title="Recurring"
+              onPress={() => dispatch(setIsRecurring(true))}
+            />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <Button
+              color="#42b3f5"
+              style={styles.button}
+              title="One Time"
+              onPress={() => dispatch(setIsRecurring(false))}
+            />
+          </View>
+        </View>
+
+        {isRecurring ? <RecurringExpenseStructure /> : <NonRecurringExpenseStructure />}
+
+        <View style={styles.submitButtonWrapper}>
+          <Button
+            color="#f5d442"
+            title="Submit"
+            onPress={() => handleAddExpense()}
+          />
+        </View>
       </View>
-
-      {isRecurring ? ( < RecurringExpenseStructure />) : ( <NonRecurringExpenseStructure /> )}
-
-      <Button style={styles.button} title="Submit" onPress={()=> handleAddExpense()} />
-
-    </View>
+    </ScrollView>
   );
 };
 

@@ -1,22 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { setSelectedYear } from '../../redux/actions/expenseActions'; // Import your action creator
 
 const YearSelector = () => {
   const currentYear = new Date().getFullYear();
-  const selectedYear = useSelector(state => state.selectedYear); // Assuming selectedYear is stored in Redux store
+  const selectedYear = useSelector(state => state.expense.selectedYear); // Assuming selectedYear is stored in Redux store
   const dispatch = useDispatch();
 
   const yearsToShow = [currentYear, currentYear + 1, currentYear + 2];
 
   return (
     <View style={styles.container}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.yearContainer}
-      >
+      <Text style={{ margin: 5 }}> Next Due Year </Text>
+      <View style={styles.yearContainer}>
         {yearsToShow.map((year) => (
           <TouchableOpacity
             key={year}
@@ -36,30 +33,32 @@ const YearSelector = () => {
             </Text>
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 10,
+
   },
   yearContainer: {
     flexDirection: 'row',
+    width: "100%",
     alignItems: 'center',
+    margin:5,
+    justifyContent: 'center', // Center items horizontally
   },
   yearItem: {
     paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 40,
     borderRadius: 10,
     marginHorizontal: 5,
-    borderColor: '#ccc',
-    borderWidth: 1,
     backgroundColor: '#fff',
   },
   selectedYearItem: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#42b3f5',
   },
   yearText: {
     fontSize: 16,

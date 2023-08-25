@@ -3,15 +3,14 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setYearlyMonth } from '../../redux/actions/expenseActions';
 
-
 export default function MonthSelector() {
   const dispatch = useDispatch();
 
-  const yearlyMonth = useSelector((state) => state.expense.yearlyMonth);
+  const yearlyMonth = useSelector((state) => state.expense.selectedMonth) - 1;
   const isEnding = useSelector((state) => state.expense.isEnding);
 
   const handleYearlyMonthSelect = (monthIndex) => {
-    dispatch(setYearlyMonth(monthIndex+1));
+    dispatch(setYearlyMonth(monthIndex + 1));
   };
 
   const getMonthName = (monthIndex) => {
@@ -35,24 +34,29 @@ export default function MonthSelector() {
 
   return (
     <>
-      
-        <ScrollView horizontal>
-          {Array.from({ length: 12 }, (_, index) => index).map((monthIndex) => (
-            <TouchableOpacity
-              key={monthIndex}
-              onPress={() => handleYearlyMonthSelect(monthIndex)}
+      <Text style={{ margin: 5 }}> Next Due Month </Text>
+      <ScrollView horizontal>
+        {Array.from({ length: 12 }, (_, index) => index).map((monthIndex) => (
+          <TouchableOpacity
+            key={monthIndex}
+            onPress={() => handleYearlyMonthSelect(monthIndex)}
+            style={{
+              backgroundColor: yearlyMonth === monthIndex ? "#42b3f5" : "white",
+              margin: 5,
+              padding: 10,
+              borderRadius: 5,
+            }}
+          >
+            <Text
               style={{
-                backgroundColor: yearlyMonth === monthIndex ? "blue" : "gray",
-                margin: 5,
-                padding: 10,
-                borderRadius: 5,
+                color: yearlyMonth === monthIndex ? "white" : "black", // Change text color when selected
               }}
             >
-              <Text>{getMonthName(monthIndex)}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      
+              {getMonthName(monthIndex)}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </>
   );
 }
