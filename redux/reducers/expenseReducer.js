@@ -15,6 +15,7 @@ import {
   SELECT_FREQUENCY,
   ADD_PAID_MONTH,
   REMOVE_PAID_MONTH,
+  REMOVE_EXPENSE,
 } from "../actionTypes";
 
 import {
@@ -141,9 +142,12 @@ const expenseReducer = (state = initialState, action) => {
                 { month: action.payload.month, year: action.payload.year },
               ],
             }
-          : expense          
-          );
-          console.log("Updated expenses after ADD_PAID_MONTH:", JSON.stringify(updatedExpensesAdd, null, 2));
+          : expense
+      );
+      console.log(
+        "Updated expenses after ADD_PAID_MONTH:",
+        JSON.stringify(updatedExpensesAdd, null, 2)
+      );
 
       return {
         ...state,
@@ -173,6 +177,14 @@ const expenseReducer = (state = initialState, action) => {
       return {
         ...state,
         expenses: updatedExpensesRemove,
+      };
+    case REMOVE_EXPENSE:
+      const updatedExpenses = state.expenses.filter(
+        (expense) => expense.id !== action.payload.expenseId
+      );
+      return {
+        ...state,
+        expenses: updatedExpenses,
       };
 
     default:

@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    margin:10,
+    backgroundColor: "white",
+    margin: 10,
     padding: 16,
     marginVertical: 8,
     borderRadius: 16,
-    width: '95%', // Make it wider to the screen
-    shadowColor: '#000',
+    width: "95%", // Make it wider to the screen
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 4,
   },
   amount: {
@@ -29,17 +29,21 @@ const styles = StyleSheet.create({
   recurring: {
     fontSize: 14,
     marginBottom: 4,
-    color: 'gray',
+    color: "gray",
   },
   date: {
     fontSize: 14,
-    color: 'gray',
+    color: "gray",
   },
   editButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 10,
-    
+  },
+  deleteButton: {
+    position: "absolute",
+    top: 18,
+    right: 20,
   },
 });
 
