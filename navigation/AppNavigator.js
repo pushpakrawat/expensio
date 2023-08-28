@@ -14,6 +14,7 @@ const HomeStack = () => (
       options={{ headerShown: false }} // Hide the header on the Home screen
     />
     <Stack.Screen name="AddExpense" component={AddExpenseStructure} />
+    {/* <Stack.Screen name="EditExpense" component={EditExpenseScreen} /> */}
   </Stack.Navigator>
 );
 

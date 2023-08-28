@@ -39,7 +39,7 @@ const AddExpenseStructure = () => {
         <View style={styles.buttonContainer}>
           <View style={styles.buttonWrapper}>
             <Button
-              color="#42b3f5"
+              color={isRecurring ? "#f5d442" : "#42b3f5"}
               style={styles.button}
               title="Recurring"
               onPress={() => dispatch(setIsRecurring(true))}
@@ -47,7 +47,7 @@ const AddExpenseStructure = () => {
           </View>
           <View style={styles.buttonWrapper}>
             <Button
-              color="#42b3f5"
+              color={!isRecurring ? "#f5d442" : "#42b3f5"}
               style={styles.button}
               title="One Time"
               onPress={() => dispatch(setIsRecurring(false))}
@@ -59,7 +59,7 @@ const AddExpenseStructure = () => {
 
         <View style={styles.submitButtonWrapper}>
           <Button
-            color="#f5d442"
+            color="#42b3f5"
             title="Submit"
             onPress={() => handleAddExpense()}
           />

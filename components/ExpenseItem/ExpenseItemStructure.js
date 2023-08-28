@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useExpenseItemLogic } from './ExpenseItemCode';
-import styles from './ExpenseItemStyle'; // Make sure to import your styles
+import styles from './ExpenseItemStyle';
+import MarkPaidButton from '../smallComponents/MarkPaidButton';
+import Icon from 'react-native-vector-icons/FontAwesome'; // Adjust the icon library and name as needed
 
 const ExpenseItemStructure = ({ expense }) => {
-  const { title, amount, isRecurring, formattedDate, formattedDueDate } = useExpenseItemLogic(expense);
+  const { formattedDate, formattedDueDate } = useExpenseItemLogic(expense);
+  const { id, title, amount, isRecurring } = expense;
 
   return (
     <View style={styles.container}>
@@ -15,6 +18,13 @@ const ExpenseItemStructure = ({ expense }) => {
       </Text>
       <Text style={styles.date}>Created on: {formattedDate}</Text>
       <Text>Due date: {formattedDueDate}</Text>
+      <MarkPaidButton expense={expense}/>
+
+      
+      <TouchableOpacity style={styles.editButton} onPress={() => console.log('Edit pressed')}>
+        <Icon name="pencil" size={20} color="black" />
+        <Text>Edit</Text>
+      </TouchableOpacity>
     </View>
   );
 };

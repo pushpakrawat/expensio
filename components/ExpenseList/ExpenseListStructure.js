@@ -12,7 +12,7 @@ const ExpenseListStructure = () => { // Pass currentMonth and currentYear as pro
       <FlatList
         data={filteredExpenses}
         keyExtractor={(expense) => expense.id.toString()}
-        renderItem={({ item }) => <ExpenseItemStructure expense={item} />}
+        renderItem={({ item }) => <ExpenseItemStructure expense={item} /> }
       />
     </View>
   );

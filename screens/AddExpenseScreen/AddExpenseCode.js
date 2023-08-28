@@ -6,15 +6,16 @@ import { useNavigation } from '@react-navigation/native'; // Import useNavigatio
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation(); 
-  const { title, amount, isRecurring, expenseEndDate, selectedFrequency,selectedDate, selectedMonth, selectedYear } = useSelector(state => state.expense);
+  const { title, amount, isRecurring, expenseEndDate, selectedFrequency,selectedDate, selectedMonth, selectedYear, paidMonths } = useSelector(state => state.expense);
 
 
 
   const generateUniqueId = () => {
     const timestamp = Date.now().toString(36);
-    const randomNumber = Math.random().toString(36).substr(2);
+    const randomNumber = Math.floor(Math.random() * 36 ** 6).toString(36); // Generate a random number between 0 and 36^6 - 1
     return `${timestamp}-${randomNumber}`;
   };
+  
 
   const handleTitleChange = text => {
     console.log('handleTitleChange:', text);
@@ -45,7 +46,7 @@ export const useAddExpenseLogic = () => {
         selectedMonth,
         selectedYear,
         expenseEndDate,
-
+        paidMonths,
       };
       // console.log('handleAddExpense - New Expense:', newExpense);
       dispatch(addExpense(newExpense));
@@ -53,7 +54,7 @@ export const useAddExpenseLogic = () => {
       // Clear the fields
       dispatch(setTitle(''));
       dispatch(setAmount(''));
-      dispatch(setIsRecurring(''));
+      dispatch(setIsRecurring(""));
       dispatch(setMonthlyDate(""));   
       dispatch(setExpenseDate(""));   
 

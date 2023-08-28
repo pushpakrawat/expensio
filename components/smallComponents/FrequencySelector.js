@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   selectedFrequencyButton: {
-    backgroundColor: '#42b3f5',
+    backgroundColor: "#f5d442",
     borderColor: 'grey',
   },
   buttonText: {

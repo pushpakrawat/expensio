@@ -41,7 +41,7 @@ export default function MonthSelector() {
             key={monthIndex}
             onPress={() => handleYearlyMonthSelect(monthIndex)}
             style={{
-              backgroundColor: yearlyMonth === monthIndex ? "#42b3f5" : "white",
+              backgroundColor: yearlyMonth === monthIndex ? "#f5d442" : "white",
               margin: 5,
               padding: 10,
               borderRadius: 5,

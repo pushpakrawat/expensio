@@ -13,6 +13,8 @@ import {
   SET_EXPENSE_DATE,
   SET_MONTHLY_DATE,
   SELECT_FREQUENCY,
+  ADD_PAID_MONTH,
+  REMOVE_PAID_MONTH,
 } from "../actionTypes";
 
 import {
@@ -34,9 +36,10 @@ const initialState = {
   selectedFrequency: "",
   selectedDate: "",
   selectedMonth: "",
-  selectedYear:'',
+  selectedYear: "",
   expenseEndDate: "",
   expenses: [],
+  paidMonths: [],
 };
 
 const expenseReducer = (state = initialState, action) => {
@@ -123,6 +126,53 @@ const expenseReducer = (state = initialState, action) => {
       return {
         ...state,
         expenses: newExpenses,
+      };
+
+    case ADD_PAID_MONTH:
+      console.log("Action expenseId", action.payload.expenseId);
+      console.log("Action month", action.payload.month);
+      console.log("Action year", action.payload.year);
+      const updatedExpensesAdd = state.expenses.map((expense) =>
+        expense.id === action.payload.expenseId
+          ? {
+              ...expense,
+              paidMonths: [
+                ...expense.paidMonths,
+                { month: action.payload.month, year: action.payload.year },
+              ],
+            }
+          : expense          
+          );
+          console.log("Updated expenses after ADD_PAID_MONTH:", JSON.stringify(updatedExpensesAdd, null, 2));
+
+      return {
+        ...state,
+        expenses: updatedExpensesAdd,
+      };
+
+    case REMOVE_PAID_MONTH:
+      console.log("REMOVE_PAID_MONTH action dispatched.");
+      const updatedExpensesRemove = state.expenses.map((expense) =>
+        expense.id === action.payload.expenseId
+          ? {
+              ...expense,
+              paidMonths: expense.paidMonths.filter(
+                (item) =>
+                  !(
+                    item.month === action.payload.month &&
+                    item.year === action.payload.year
+                  )
+              ),
+            }
+          : expense
+      );
+      console.log(
+        "Updated expenses after REMOVE_PAID_MONTH:",
+        updatedExpensesRemove
+      );
+      return {
+        ...state,
+        expenses: updatedExpensesRemove,
       };
 
     default:

@@ -1,4 +1,4 @@
-import { SET_YEARLY_MONTH, SET_MONTHLY_DATE, SET_CURRENT_MONTH_NAME, SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_EXPENSE_DATE, CLEAR_FIELDS, SELECT_FREQUENCY,SET_SELECTED_YEAR } from '../actionTypes'; // Adjust the import path based on your folder structure
+import { SET_YEARLY_MONTH, SET_MONTHLY_DATE, SET_CURRENT_MONTH_NAME, SET_CURRENT_MONTH, SET_CURRENT_YEAR, ADD_EXPENSE, SET_TITLE, SET_AMOUNT, SET_IS_RECURRING, SET_EXPENSE_DATE, CLEAR_FIELDS, SELECT_FREQUENCY,SET_SELECTED_YEAR, ADD_PAID_MONTH, REMOVE_PAID_MONTH } from '../actionTypes'; // Adjust the import path based on your folder structure
 
 export const setYearlyMonth = (monthIndex) => ({
   type: SET_YEARLY_MONTH,
@@ -75,6 +75,20 @@ export const addExpense = (newExpense) => {
 export const clearFields = () => {
   return {
     type: CLEAR_FIELDS,
+  };
+};
+
+export const addPaidMonth = ({expenseId, month, year}) => {
+  return {
+    type: ADD_PAID_MONTH,
+    payload: { expenseId, month, year },
+  };
+};
+
+export const removePaidMonth = ({expenseId, month, year}) => {
+  return {
+    type: REMOVE_PAID_MONTH,
+    payload: { expenseId, month, year },
   };
 };
 

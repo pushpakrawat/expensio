@@ -21,7 +21,7 @@ export default function DateSelector() {
             key={date}
             onPress={() => handleMonthlyDateSelect(date)}
             style={{
-              backgroundColor: monthlyDate === date ? "#42b3f5" : "white",
+              backgroundColor: monthlyDate === date ? "#f5d442" : "white",
               margin: 5,
               padding: 10,
               borderRadius: 5,

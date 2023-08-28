@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   selectedYearItem: {
-    backgroundColor: '#42b3f5',
+    backgroundColor: "#f5d442",
   },
   yearText: {
     fontSize: 16,
