@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setTitle, setAmount, setIsRecurring, setIsEnding, addExpense, setExpenseDate, setMonthlyDate } from '../../redux/actions/expenseActions';
+import { setTitle, setAmount, setIsRecurring, addExpense, setExpenseDate, setMonthlyDate, selectFrequency, setSelectedYear, setYearlyMonth } from '../../redux/actions/expenseActions';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation from React Navigation
 
 
@@ -54,9 +54,13 @@ export const useAddExpenseLogic = () => {
       // Clear the fields
       dispatch(setTitle(''));
       dispatch(setAmount(''));
-      dispatch(setIsRecurring(""));
+      dispatch(setIsRecurring(null));
       dispatch(setMonthlyDate(""));   
       dispatch(setExpenseDate(""));   
+      dispatch(selectFrequency(""));   
+      dispatch(setMonthlyDate(""));   
+      dispatch(setYearlyMonth(""));   
+      dispatch(setSelectedYear(""));   
 
       // Navigate back
       navigation.goBack();

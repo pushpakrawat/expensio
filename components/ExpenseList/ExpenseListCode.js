@@ -10,13 +10,13 @@ const useExpenseListCode = () => {
   
   const filteredExpenses = expenses.filter(expense => {
     const { expenseEndDate, selectedFrequency, isRecurring, selectedMonth, selectedYear } = expense;
-    console.log('EL - Selected Month', selectedMonth);
-    console.log('EL - Selected Year', selectedYear);
+    // console.log('EL - Selected Month', selectedMonth);
+    // console.log('EL - Selected Year', selectedYear);
 
     const endMonth = expenseEndDate ? expenseEndDate.getMonth() + 1 : Infinity;
-    console.log('EL - End Month', endMonth)
+    // console.log('EL - End Month', endMonth)
     const endYear = expenseEndDate ? expenseEndDate.getFullYear() : Infinity;
-    console.log('EL - End Year', endYear)
+    // console.log('EL - End Year', endYear)
 
     if (!isRecurring) {
       if (endMonth === currentMonth && endYear === currentYear) {

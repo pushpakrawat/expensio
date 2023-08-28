@@ -17,24 +17,24 @@ export default function DateMonthYearPicker() {
   };
 
   const handleRemoveEndDate = () => {
-    dispatch(setExpenseDate(''));
+    dispatch(setExpenseDate(""));
     setShowDatePicker(false);
   };
 
   return (
     <View>
-      {!selectedDate && (
-        <>
-        {isRecurring && <Text style={{ margin: 5 }}> Set an Ending Date </Text>}
-        
+      {!selectedDate && isRecurring && (
+        <Text style={{ margin: 5 }}>Set an Ending Date</Text>
+      )}
+
+      {!selectedDate && isRecurring !== null && (
         <View
           style={{
-            marginVertical: 10,            
+            marginVertical: 10,
             borderRadius: 8,
             overflow: "hidden",
           }}
         >
-          
           <Button
             color="#42b3f5"
             title="Select Date"
@@ -42,14 +42,13 @@ export default function DateMonthYearPicker() {
             disabled={showDatePicker}
           />
         </View>
-        </>
       )}
 
       {selectedDate && (
         <View style={{ margin: 10 }}>
-          <Text style={{
-              margin: 10,
-            }}>Selected Date: {selectedDate.toDateString()}</Text>
+          <Text style={{ margin: 10 }}>
+            Selected Date: {selectedDate.toDateString()}
+          </Text>
 
           <View
             style={{
@@ -74,11 +73,15 @@ export default function DateMonthYearPicker() {
             <View
               style={{
                 width: "45%",
-                borderRadius: 8,                
+                borderRadius: 8,
                 overflow: "hidden",
               }}
             >
-              <Button color="#42b3f5" title="Remove Date" onPress={handleRemoveEndDate} />
+              <Button
+                color="#42b3f5"
+                title="Remove Date"
+                onPress={handleRemoveEndDate}
+              />
             </View>
           </View>
         </View>

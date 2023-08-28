@@ -33,7 +33,7 @@ const initialState = {
   currentYear: initialYear,
   title: "",
   amount: "",
-  isRecurring: "",
+  isRecurring: null,
   selectedFrequency: "",
   selectedDate: "",
   selectedMonth: "",
@@ -46,34 +46,34 @@ const initialState = {
 const expenseReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_MONTH_NAME:
-      console.log("(REDUCER)SET_CURRENT_MONTH_NAME:", action.payload);
+      // console.log("(REDUCER)SET_CURRENT_MONTH_NAME:", action.payload);
       return {
         ...state,
         currentMonthName: action.payload,
       };
     case SET_CURRENT_MONTH:
-      console.log("(REDUCER)SET_CURRENT_MONTH:", action.payload);
+      // console.log("(REDUCER)SET_CURRENT_MONTH:", action.payload);
       return {
         ...state,
         currentMonth: action.payload,
       };
 
     case SET_CURRENT_YEAR:
-      console.log("(REDUCER)SET_CURRENT_YEAR:", action.payload);
+      // console.log("(REDUCER)SET_CURRENT_YEAR:", action.payload);
       return {
         ...state,
         currentYear: action.payload,
       };
 
     case SET_TITLE:
-      console.log("(REDUCER)SET_TITLE:", action.payload);
+      // console.log("(REDUCER)SET_TITLE:", action.payload);
       return {
         ...state,
         title: action.payload,
       };
 
     case SET_AMOUNT:
-      console.log("(REDUCER)SET_AMOUNT:", action.payload);
+      // console.log("(REDUCER)SET_AMOUNT:", action.payload);
       return {
         ...state,
         amount: action.payload,
@@ -87,34 +87,34 @@ const expenseReducer = (state = initialState, action) => {
       };
 
     case SELECT_FREQUENCY:
-      console.log("(REDUCER)SELECT_FREQUENCY:", action.payload);
+      // console.log("(REDUCER)SELECT_FREQUENCY:", action.payload);
       return {
         ...state,
         selectedFrequency: action.payload,
       };
     case SET_MONTHLY_DATE:
-      console.log("(REDUCER)SET_MONTHLY_DATE:", action.payload);
+      // console.log("(REDUCER)SET_MONTHLY_DATE:", action.payload);
       return {
         ...state,
         selectedDate: action.payload,
       };
 
     case SET_YEARLY_MONTH:
-      console.log("(REDUCER)SET_YEARLY_MONTH:", action.payload);
+      // console.log("(REDUCER)SET_YEARLY_MONTH:", action.payload);
       return {
         ...state,
         selectedMonth: action.payload,
       };
 
     case SET_SELECTED_YEAR:
-      console.log("(REDUCER)SET_SELECTED_YEAR:", action.payload);
+      // console.log("(REDUCER)SET_SELECTED_YEAR:", action.payload);
       return {
         ...state,
         selectedYear: action.payload,
       };
 
     case SET_EXPENSE_DATE:
-      console.log("(REDUCER)SET_EXPENSE_DATE:", action.payload);
+      // console.log("(REDUCER)SET_EXPENSE_DATE:", action.payload);
       return {
         ...state,
         expenseEndDate: action.payload, // Create a new array instance
@@ -123,16 +123,16 @@ const expenseReducer = (state = initialState, action) => {
     case ADD_EXPENSE:
       const newExpenses = [...state.expenses, action.payload];
       // addExpensesToStorage(newExpenses);
-      console.log(newExpenses);
+      // console.log(newExpenses);
       return {
         ...state,
         expenses: newExpenses,
       };
 
     case ADD_PAID_MONTH:
-      console.log("Action expenseId", action.payload.expenseId);
-      console.log("Action month", action.payload.month);
-      console.log("Action year", action.payload.year);
+      // console.log("Action expenseId", action.payload.expenseId);
+      // console.log("Action month", action.payload.month);
+      // console.log("Action year", action.payload.year);
       const updatedExpensesAdd = state.expenses.map((expense) =>
         expense.id === action.payload.expenseId
           ? {
@@ -144,10 +144,10 @@ const expenseReducer = (state = initialState, action) => {
             }
           : expense
       );
-      console.log(
-        "Updated expenses after ADD_PAID_MONTH:",
-        JSON.stringify(updatedExpensesAdd, null, 2)
-      );
+      // console.log(
+      //   "Updated expenses after ADD_PAID_MONTH:",
+      //   JSON.stringify(updatedExpensesAdd, null, 2)
+      // );
 
       return {
         ...state,
@@ -155,7 +155,7 @@ const expenseReducer = (state = initialState, action) => {
       };
 
     case REMOVE_PAID_MONTH:
-      console.log("REMOVE_PAID_MONTH action dispatched.");
+      // console.log("REMOVE_PAID_MONTH action dispatched.");
       const updatedExpensesRemove = state.expenses.map((expense) =>
         expense.id === action.payload.expenseId
           ? {
@@ -170,10 +170,10 @@ const expenseReducer = (state = initialState, action) => {
             }
           : expense
       );
-      console.log(
-        "Updated expenses after REMOVE_PAID_MONTH:",
-        updatedExpensesRemove
-      );
+      // console.log(
+      //   "Updated expenses after REMOVE_PAID_MONTH:",
+      //   updatedExpensesRemove
+      // );
       return {
         ...state,
         expenses: updatedExpensesRemove,

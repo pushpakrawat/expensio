@@ -14,9 +14,9 @@ export const useMonthYearSelectorLogic = () => {
   const currentMonth = currentMonthIndex; 
   const currentMonthName = monthNames[currentMonthIndex - 1]; // Get the month name from the array
 
-  console.log('(MD Selector)currentMonthName:', currentMonthName);
-  console.log('(MD Selector)currentMonth:', currentMonth);
-  console.log('(MD Selector)currentYear:', currentYear);
+  // console.log('(MD Selector)currentMonthName:', currentMonthName);
+  // console.log('(MD Selector)currentMonth:', currentMonth);
+  // console.log('(MD Selector)currentYear:', currentYear);
 
   const handlePrevMonth = () => {
     let newMonth = currentMonthIndex - 1;
