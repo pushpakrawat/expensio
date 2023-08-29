@@ -6,8 +6,6 @@ import {
   SET_TITLE,
   SET_AMOUNT,
   SET_IS_RECURRING,
-  SET_IS_ENDING,
-  SET_IS_CUSTOM,
   SET_YEARLY_MONTH,
   SET_SELECTED_YEAR,
   SET_EXPENSE_DATE,
@@ -15,6 +13,7 @@ import {
   SELECT_FREQUENCY,
   ADD_PAID_MONTH,
   REMOVE_PAID_MONTH,
+  SET_FILTERED_EXPENSES,
   REMOVE_EXPENSE,
 } from "../actionTypes";
 
@@ -39,6 +38,7 @@ const initialState = {
   selectedMonth: "",
   selectedYear: "",
   expenseEndDate: "",
+  filteredExpenses: [],
   expenses: [],
   paidMonths: [],
 };
@@ -123,7 +123,7 @@ const expenseReducer = (state = initialState, action) => {
     case ADD_EXPENSE:
       const newExpenses = [...state.expenses, action.payload];
       // addExpensesToStorage(newExpenses);
-      // console.log(newExpenses);
+      console.log(newExpenses);
       return {
         ...state,
         expenses: newExpenses,
@@ -178,6 +178,14 @@ const expenseReducer = (state = initialState, action) => {
         ...state,
         expenses: updatedExpensesRemove,
       };
+
+    case SET_FILTERED_EXPENSES:
+      console.log("REducer, SET_FILTERED_EXPENSES", action.payload);
+      return {
+        ...state,
+        filteredExpenses: action.payload,
+      };
+      
     case REMOVE_EXPENSE:
       const updatedExpenses = state.expenses.filter(
         (expense) => expense.id !== action.payload.expenseId

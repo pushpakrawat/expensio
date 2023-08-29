@@ -26,7 +26,7 @@ export const useExpenseItemLogic = (expense) => {
     .padStart(2, "0")}/${year.toString().padStart(2, "0")}`;
 
   // Get current month and year from Redux store
-  const currentMonth = useSelector((state) => state.expense.currentMonth) + 1;
+  const currentMonth = useSelector((state) => state.expense.currentMonth) ;
   const currentYear = useSelector((state) => state.expense.currentYear);
 
   let formattedDueDate;

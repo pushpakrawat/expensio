@@ -9,6 +9,7 @@ import {
   SET_AMOUNT,
   SET_IS_RECURRING,
   SET_EXPENSE_DATE,
+  SET_FILTERED_EXPENSES,
   CLEAR_FIELDS,
   SELECT_FREQUENCY,
   SET_SELECTED_YEAR,
@@ -108,6 +109,14 @@ export const removePaidMonth = ({ expenseId, month, year }) => {
     payload: { expenseId, month, year },
   };
 };
+
+export const setFilteredExpenses = (filteredExpenses) => {
+  return {
+    type: SET_FILTERED_EXPENSES,
+    payload: filteredExpenses, // Pass the array directly
+  };
+};
+
 
 export const removeExpense = (expenseId) => {
   return {

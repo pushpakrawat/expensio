@@ -18,18 +18,18 @@ export const useAddExpenseLogic = () => {
   
 
   const handleTitleChange = text => {
-    console.log('handleTitleChange:', text);
+    // console.log('handleTitleChange:', text);
     dispatch(setTitle(text));
   };
 
   const handleAmountChange = text => {
-    console.log('handleAmountChange:', text);
+    // console.log('handleAmountChange:', text);
     dispatch(setAmount(text));
   };
 
 
   const handleDateChange = date => {
-    console.log('handleDateChange:', date);
+    // console.log('handleDateChange:', date);
     dispatch(setExpenseDate(date)); // Dispatch the selected date to Redux
   };
 

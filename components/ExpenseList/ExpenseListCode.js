@@ -1,7 +1,13 @@
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { addExpensesToStorage, retrieveExpensesFromStorage,} from "../../Utills/storage";
+import { setFilteredExpenses } from "../../redux/actions/expenseActions";
+import { useDispatch } from "react-redux";
+
 
 const useExpenseListCode = () => {
+
+  const dispatch = useDispatch();
   const expenses = useSelector(state => state.expense.expenses);
   const currentMonth = useSelector(state => state.expense.currentMonth);
   const currentYear = useSelector(state => state.expense.currentYear);
@@ -39,7 +45,9 @@ const useExpenseListCode = () => {
     
     return false;
   });
-
+  useEffect(() => {
+    dispatch(setFilteredExpenses(filteredExpenses));
+  }, [dispatch, filteredExpenses]);
   return filteredExpenses;
 };
 
