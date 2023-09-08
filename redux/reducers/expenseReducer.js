@@ -17,10 +17,7 @@ import {
   REMOVE_EXPENSE,
 } from "../actionTypes";
 
-import {
-  addExpensesToStorage,
-  retrieveExpensesFromStorage,
-} from "../../Utills/storage";
+import { addExpenseToFirestore } from '../../firebaseUtils';
 
 const currentDate = new Date();
 const initialMonth = currentDate.getMonth() + 1;
@@ -120,14 +117,25 @@ const expenseReducer = (state = initialState, action) => {
         expenseEndDate: action.payload, // Create a new array instance
       };
 
-    case ADD_EXPENSE:
-      const newExpenses = [...state.expenses, action.payload];
-      // addExpensesToStorage(newExpenses);
-      console.log(newExpenses);
-      return {
-        ...state,
-        expenses: newExpenses,
-      };
+      case ADD_EXPENSE:
+        const newExpense = action.payload;
+      
+        // Call the async function to add the expense to Firestore
+        addExpenseToFirestore(newExpense)
+          .then((docId) => {
+            // Successfully added to Firestore
+            console.log('Expense added with ID: ', docId);
+      
+            // Update your Redux state with the new expense
+            const newExpenses = [...state.expenses, { id: docId, ...newExpense }];
+            return {
+              ...state,
+              expenses: newExpenses,
+            };
+          })
+          .catch((error) => {
+            console.error('Error adding expense: ', error);
+          });
 
     case ADD_PAID_MONTH:
       // console.log("Action expenseId", action.payload.expenseId);
