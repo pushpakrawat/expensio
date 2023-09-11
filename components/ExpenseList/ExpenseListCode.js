@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setFilteredExpenses } from "../../redux/actions/expenseActions";
-import { useDispatch } from "react-redux";
+
 
 
 const useExpenseListCode = () => {

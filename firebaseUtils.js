@@ -9,6 +9,7 @@ import {
   deleteDoc,
   setDoc,
   onSnapshot,
+  getDocs,
 } from 'firebase/firestore';
 
 // // Define the updateCallback function
@@ -17,43 +18,20 @@ import {
 // };
 
 // Function to retrieve expenses from Firestore with a real-time listener
-export const getExpensesFromFirestore = () => {
-  const dispatch = useDispatch();
-
+export const getExpensesFromFirestore = async () => {
   try {
     const expensesCollectionRef = collection(FIREBASE_DB, 'expenses'); // Replace FIREBASE_DB with your Firestore instance
-    const unsubscribe = onSnapshot(expensesCollectionRef, (querySnapshot) => {
-      const expenses = [];
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-
-        // Convert Firestore Timestamps to JavaScript Date objects
-        const date = data.date.toDate();
-
-        // Check if expenseEndDate exists and is not an empty string
-        const expenseEndDate =
-          data.expenseEndDate && data.expenseEndDate !== ""
-            ? data.expenseEndDate.toDate()
-            : "";
-
-        data.date = date;
-        data.expenseEndDate = expenseEndDate;
-
-        expenses.push({
-          id: doc.id,
-          ...data,
-        });
-      });
-
-      // Dispatch the GET_EXPENSES action to update the Redux store with the fetched data
-      dispatch(getExpenses(expenses));
-    });
-
-    // Return the unsubscribe function to stop listening when needed
-    return unsubscribe;
+    const querySnapshot = await getDocs(expensesCollectionRef);
+    const expenses = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    console.log("Firebase Utils - sending expenses: ", expenses)
+    return expenses;
   } catch (error) {
+    // Handle errors here
     console.error('Error fetching expenses from Firestore: ', error);
-    throw error;
+    throw error; // Rethrow the error for the caller to handle
   }
 };
 
