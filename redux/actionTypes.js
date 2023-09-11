@@ -8,6 +8,7 @@ export const SET_IS_ENDING = 'SET_IS_ENDING';
 export const SET_IS_CUSTOM = 'SET_IS_CUSTOM';
 export const SET_EXPENSE_DATE = 'SET_EXPENSE_DATE';
 export const SET_MONTHLY_DATE = 'SET_MONTHLY_DATE';
+export const SET_DATA_LOADED = "SET_DATA_LOADED";
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const CLEAR_FIELDS = 'CLEAR_FIELDS';
 export const SELECT_FREQUENCY = 'SELECT_FREQUENCY';

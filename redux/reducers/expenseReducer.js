@@ -1,4 +1,5 @@
 import {
+  SET_DATA_LOADED,
   SET_CURRENT_MONTH_NAME,
   SET_CURRENT_MONTH,
   SET_CURRENT_YEAR,
@@ -29,6 +30,7 @@ const initialMonth = currentDate.getMonth() + 1;
 const initialYear = currentDate.getFullYear();
 
 const initialState = {
+  isDataLoaded: false,
   currentMonthName: "",
   currentMonth: initialMonth,
   currentYear: initialYear,
@@ -47,6 +49,9 @@ const initialState = {
 
 const expenseReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_DATA_LOADED:
+      return { ...state, isDataLoaded: action.payload, };
+
     case SET_CURRENT_MONTH_NAME:
       return { ...state, currentMonthName: action.payload };
     

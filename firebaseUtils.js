@@ -1,4 +1,6 @@
 import { FIREBASE_DB } from './firebaseconfig';
+import { useDispatch } from 'react-redux';
+import { getExpenses } from './redux/actions/expenseActions';
 import {
   addDoc,
   collection,
@@ -15,16 +17,15 @@ import {
 // };
 
 // Function to retrieve expenses from Firestore with a real-time listener
-export const getExpensesFromFirestore = async () => {
-  try {
-    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses');
+export const getExpensesFromFirestore = () => {
+  const dispatch = useDispatch();
 
-    // Set up a real-time listener
+  try {
+    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses'); // Replace FIREBASE_DB with your Firestore instance
     const unsubscribe = onSnapshot(expensesCollectionRef, (querySnapshot) => {
       const expenses = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        console.log("firebaseUtils - Data retrieved: ", data);
 
         // Convert Firestore Timestamps to JavaScript Date objects
         const date = data.date.toDate();
@@ -35,18 +36,17 @@ export const getExpensesFromFirestore = async () => {
             ? data.expenseEndDate.toDate()
             : "";
 
-            data.date = date;
-            data.expenseEndDate = expenseEndDate;
-          
-            // Return the updated data object
-            console.log("firebaseUtils - Data converted: ", data);
-            return {
-              id: doc.id,
-              ...data,
-            };
+        data.date = date;
+        data.expenseEndDate = expenseEndDate;
+
+        expenses.push({
+          id: doc.id,
+          ...data,
+        });
       });
-      // Use the updateCallback to notify your application of changes
-      // updateCallback(expenses);
+
+      // Dispatch the GET_EXPENSES action to update the Redux store with the fetched data
+      dispatch(getExpenses(expenses));
     });
 
     // Return the unsubscribe function to stop listening when needed
