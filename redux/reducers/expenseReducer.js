@@ -1,4 +1,9 @@
 import {
+  addExpenseToFirestore,
+  updateExpenseInFirestore,
+  deleteExpenseFromFirestore,
+} from "../../firebaseUtils";
+import {
   SET_DATA_LOADED,
   SET_CURRENT_MONTH_NAME,
   SET_CURRENT_MONTH,
@@ -18,12 +23,6 @@ import {
   REMOVE_EXPENSE,
   GET_EXPENSES,
 } from "../actionTypes";
-
-import {
-  addExpenseToFirestore,
-  updateExpenseInFirestore,
-  deleteExpenseFromFirestore,
-} from "../../firebaseUtils";
 
 const currentDate = new Date();
 const initialMonth = currentDate.getMonth() + 1;
@@ -50,60 +49,106 @@ const initialState = {
 const expenseReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_DATA_LOADED:
-      return { ...state, isDataLoaded: action.payload, };
+      return { ...state, isDataLoaded: action.payload };
 
     case SET_CURRENT_MONTH_NAME:
       return { ...state, currentMonthName: action.payload };
-    
+
     case SET_CURRENT_MONTH:
       return { ...state, currentMonth: action.payload };
-    
+
     case SET_CURRENT_YEAR:
       return { ...state, currentYear: action.payload };
-    
+
     case SET_TITLE:
       return { ...state, title: action.payload };
-    
+
     case SET_AMOUNT:
       return { ...state, amount: action.payload };
-    
+
     case SET_IS_RECURRING:
       return { ...state, isRecurring: action.payload };
-    
+
     case SELECT_FREQUENCY:
       return { ...state, selectedFrequency: action.payload };
-    
+
     case SET_MONTHLY_DATE:
       return { ...state, selectedDate: action.payload };
-    
+
     case SET_YEARLY_MONTH:
       return { ...state, selectedMonth: action.payload };
-    
+
     case SET_SELECTED_YEAR:
       return { ...state, selectedYear: action.payload };
-    
+
     case SET_EXPENSE_DATE:
       return { ...state, expenseEndDate: action.payload };
-    
+
     case ADD_EXPENSE:
       // Handle async Firestore operation separately
       handleFirestoreOperation(addExpenseToFirestore, action.payload);
-    
+      return { ...state, isDataLoaded: false };
+
     case ADD_PAID_MONTH:
-      handleFirestoreOperation(updatePaidMonths, action.payload);
-    
+      const updatedExpensesAfterAdd = state.expenses.map((expense) =>
+        expense.id === action.payload.expenseId
+          ? {
+              ...expense,
+              paidMonths: [...new Set([...expense.paidMonths, action.payload])],
+            }
+          : expense
+      );
+
+      // Call the updateExpenseInFirestore function to update the paid months in the database
+      updateExpenseInFirestore(action.payload.expenseId, {
+        paidMonths: updatedExpensesAfterAdd.find(
+          (expense) => expense.id === action.payload.expenseId
+        ).paidMonths, // Get the updated paidMonths array
+      });
+
+      return {
+        ...state,
+        expenses: updatedExpensesAfterAdd,
+      };
+
     case REMOVE_PAID_MONTH:
-      handleFirestoreOperation(updatePaidMonths, action.payload);
-    
+      const updatedExpensesAfterRemove = state.expenses.map((expense) =>
+        expense.id === action.payload.expenseId
+          ? {
+              ...expense,
+              paidMonths: expense.paidMonths.filter(
+                (item) =>
+                  item.month !== action.payload.month ||
+                  item.year !== action.payload.year
+              ),
+            }
+          : expense
+      );
+
+      // Call the updateExpenseInFirestore function to update the paid months in the database
+      updateExpenseInFirestore(action.payload.expenseId, {
+        paidMonths: updatedExpensesAfterRemove.find(
+          (expense) => expense.id === action.payload.expenseId
+        ).paidMonths, // Get the updated paidMonths array
+      });
+
+      return {
+        ...state,
+        expenses: updatedExpensesAfterRemove,
+      };
     case SET_FILTERED_EXPENSES:
       return { ...state, filteredExpenses: action.payload };
-    
+
     case REMOVE_EXPENSE:
       // Handle async Firestore operation separately
-      handleFirestoreOperation(deleteExpenseFromFirestore, action.payload.expenseId);
-    
+      handleFirestoreOperation(
+        deleteExpenseFromFirestore,
+        action.payload.expenseId
+      );
+      return { ...state, isDataLoaded: false };
+
     case GET_EXPENSES:
-      console.log("Reducer - expenses retrieved: ", action.payload)
+      console.log("Reducer - expenses retrieved: ", action.payload);
       return { ...state, expenses: action.payload };
 
     default:
@@ -118,18 +163,6 @@ const handleFirestoreOperation = async (operation, payload) => {
   } catch (error) {
     console.error("Error performing Firestore operation: ", error);
   }
-};
-
-// Helper function to update paid months
-const updatePaidMonths = (expenseId, month, year) => {
-  return state.expenses.map((expense) =>
-    expense.id === expenseId
-      ? {
-          ...expense,
-          paidMonths: [...expense.paidMonths, { month, year }],
-        }
-      : expense
-  );
 };
 
 export default expenseReducer;

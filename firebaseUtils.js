@@ -1,6 +1,6 @@
 import { FIREBASE_DB } from './firebaseconfig';
 import { useDispatch } from 'react-redux';
-import { getExpenses } from './redux/actions/expenseActions';
+import { setDataLoaded } from './redux/actions/expenseActions';
 import {
   addDoc,
   collection,
@@ -33,9 +33,9 @@ export const addExpenseToFirestore = async (expense) => {
   console.log("Firebase Utils - expense sent: ", expense);
   try {
     const expensesCollectionRef = collection(FIREBASE_DB, 'expenses');
-    await addDoc(expensesCollectionRef, expense); // Use addDoc to automatically generate a document ID
+    const docRef = await addDoc(expensesCollectionRef, expense); // Use addDoc to automatically generate a document ID
     console.log('Expense added successfully to Firestore.');
-    return docRef.id;
+    return docRef.id; // Return the ID of the added document
   } catch (error) {
     console.error('Error adding expense to Firestore: ', error);
     throw error;
@@ -65,7 +65,7 @@ export const deleteExpenseFromFirestore = async (expenseId) => {
     console.log('Expense deleted successfully from Firestore.');
 
     // Fetch updated expenses after a successful deletion
-    // await getExpensesFromFirestore();
+    await getExpensesFromFirestore();
   } catch (error) {
     console.error('Error deleting expense from Firestore: ', error);
     throw error;

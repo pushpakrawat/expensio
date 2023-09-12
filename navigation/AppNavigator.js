@@ -14,6 +14,7 @@ const AppNavigator = () => {
         <Stack.Screen
           name="Loading"
           component={LoadingScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Home"
