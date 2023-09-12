@@ -37,7 +37,7 @@ export const useAddExpenseLogic = () => {
     if (title && amount ) { // Make sure a date is selected
       const newExpense = {
         date: new Date(),
-        id: generateUniqueId(), // Generate a unique id
+        // id: generateUniqueId(), // Generate a unique id
         title,
         amount: parseFloat(amount),
         isRecurring,

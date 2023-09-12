@@ -12,15 +12,9 @@ import {
   getDocs,
 } from 'firebase/firestore';
 
-// // Define the updateCallback function
-// const updateCallback = (expenses) => {
-//   console.log('Expenses updated in real-time:', expenses);
-// };
-
-// Function to retrieve expenses from Firestore with a real-time listener
 export const getExpensesFromFirestore = async () => {
   try {
-    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses'); // Replace FIREBASE_DB with your Firestore instance
+    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses'); 
     const querySnapshot = await getDocs(expensesCollectionRef);
     const expenses = querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -36,15 +30,11 @@ export const getExpensesFromFirestore = async () => {
 };
 
 export const addExpenseToFirestore = async (expense) => {
-  console.log("Firebase Utills - expeses sent : ", expense)
+  console.log("Firebase Utils - expense sent: ", expense);
   try {
-    const docRef = doc(FIREBASE_DB, 'expenses', expense.id);
-    await setDoc(docRef, expense);
+    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses');
+    await addDoc(expensesCollectionRef, expense); // Use addDoc to automatically generate a document ID
     console.log('Expense added successfully to Firestore.');
-
-    // Fetch updated expenses after a successful addition
-    await getExpensesFromFirestore();
-
     return docRef.id;
   } catch (error) {
     console.error('Error adding expense to Firestore: ', error);
@@ -60,7 +50,7 @@ export const updateExpenseInFirestore = async (expenseId, updatedData) => {
     console.log('Expense updated successfully in Firestore.');
 
     // Fetch updated expenses after a successful update
-    await getExpensesFromFirestore();
+    // await getExpensesFromFirestore();
   } catch (error) {
     console.error('Error updating expense in Firestore: ', error);
     throw error;
@@ -75,7 +65,7 @@ export const deleteExpenseFromFirestore = async (expenseId) => {
     console.log('Expense deleted successfully from Firestore.');
 
     // Fetch updated expenses after a successful deletion
-    await getExpensesFromFirestore();
+    // await getExpensesFromFirestore();
   } catch (error) {
     console.error('Error deleting expense from Firestore: ', error);
     throw error;
