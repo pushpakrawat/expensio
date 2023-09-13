@@ -11,8 +11,9 @@ const LoadingScreen = () => {
   const isDataLoaded = useSelector((state) => state.expense.isDataLoaded);
 
   useEffect(() => {
-    console.log("Loading...")
     const fetchData = async () => {
+      
+      console.log("Loading Screen: Fetching data...")
       try {
         const expensesData = await getExpensesFromFirestore();
         const expenses = expensesData.map((expense) => ({
@@ -26,7 +27,7 @@ const LoadingScreen = () => {
         dispatch(getExpenses(expenses));
         dispatch(setDataLoaded(true)); // Indicate that data is loaded
 
-        navigation.replace("Home");
+        navigation.navigate("Home");
       } catch (error) {
         console.error("Error fetching data: ", error);
       }

@@ -88,7 +88,7 @@ const expenseReducer = (state = initialState, action) => {
       return { ...state, expenseEndDate: action.payload };
 
     case ADD_EXPENSE:
-      const updatedExpenses = handleFirestoreOperation(addExpenseToFirestore, action.payload);
+      handleFirestoreOperation(addExpenseToFirestore, action.payload);
       return { ...state, isDataLoaded: false };
 
     case ADD_PAID_MONTH:
@@ -142,7 +142,7 @@ const expenseReducer = (state = initialState, action) => {
       return { ...state, filteredExpenses: action.payload };
 
     case REMOVE_EXPENSE:
-      // Handle async Firestore operation separately
+      console.log("Deleting Expense")
       handleFirestoreOperation(
         deleteExpenseFromFirestore,
         action.payload.expenseId

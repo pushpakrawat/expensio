@@ -34,9 +34,7 @@ export const addExpenseToFirestore = async (expense) => {
     const expensesCollectionRef = collection(FIREBASE_DB, "expenses");
     const docRef = await addDoc(expensesCollectionRef, expense);
     console.log("Expense added successfully to Firestore.");
-    getExpensesFromFirestore();
     return docRef.id;
-
   } catch (error) {
     console.error("Error adding expense to Firestore: ", error);
     throw error;
@@ -61,9 +59,6 @@ export const deleteExpenseFromFirestore = async (expenseId) => {
     const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
     await deleteDoc(expenseDocRef);
     console.log("Expense deleted successfully from Firestore.");
-
-    // Fetch updated expenses after a successful deletion
-    getExpensesFromFirestore();
   } catch (error) {
     console.error("Error deleting expense from Firestore: ", error);
     throw error;
