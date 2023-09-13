@@ -87,10 +87,9 @@ const expenseReducer = (state = initialState, action) => {
     case SET_EXPENSE_DATE:
       return { ...state, expenseEndDate: action.payload };
 
-      case ADD_EXPENSE:
-        // Handle async Firestore operation separately
-        handleFirestoreOperation(addExpenseToFirestore, action.payload)
-        return { ...state, isDataLoaded: false };
+    case ADD_EXPENSE:
+      const updatedExpenses = handleFirestoreOperation(addExpenseToFirestore, action.payload);
+      return { ...state, isDataLoaded: false };
 
     case ADD_PAID_MONTH:
       const updatedExpensesAfterAdd = state.expenses.map((expense) =>
