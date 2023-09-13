@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, ActivityIndicator, Text } from "react-native";
+import { View, ActivityIndicator, Text, ImageBackground } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataLoaded, getExpenses } from "../../redux/actions/expenseActions";
 import { useNavigation } from "@react-navigation/native";
@@ -39,10 +39,11 @@ const LoadingScreen = () => {
   }, [dispatch, isDataLoaded, navigation]);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" />
-      <Text>Loading your expenses...</Text>
-    </View>
+    <ImageBackground
+      source={require("../../assets/loading.png")} // Replace with your image path
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    >
+    </ImageBackground>
   );
 };
 

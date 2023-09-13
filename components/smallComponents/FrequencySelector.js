@@ -30,7 +30,7 @@ const FrequencySelector = () => {
 
   return (
     <>
-    <Text style={{ margin: 5 }}> Select Occurence </Text>
+    <Text style={{ margin: 5 }}> Occurng every </Text>
     <ScrollView horizontal contentContainerStyle={styles.container}>
       {renderFrequencyButtons()}
     </ScrollView>

@@ -138,11 +138,12 @@ const expenseReducer = (state = initialState, action) => {
         ...state,
         expenses: updatedExpensesAfterRemove,
       };
+      
     case SET_FILTERED_EXPENSES:
       return { ...state, filteredExpenses: action.payload };
 
     case REMOVE_EXPENSE:
-      console.log("Deleting Expense")
+      console.log("Deleting Expense");
       handleFirestoreOperation(
         deleteExpenseFromFirestore,
         action.payload.expenseId

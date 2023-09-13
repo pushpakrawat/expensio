@@ -12,6 +12,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 
+// GET EXPENSES
 export const getExpensesFromFirestore = async () => {
   try {
     const expensesCollectionRef = collection(FIREBASE_DB, "expenses");
@@ -27,7 +28,7 @@ export const getExpensesFromFirestore = async () => {
     throw error;
   }
 };
-
+// ADD EXPENSES
 export const addExpenseToFirestore = async (expense) => {
   console.log("Firebase Utils - expense sent: ", expense);
   try {
@@ -41,7 +42,7 @@ export const addExpenseToFirestore = async (expense) => {
   }
 };
 
-// Function to update an expense in Firestore
+//UPDATE EXPENSES
 export const updateExpenseInFirestore = async (expenseId, updatedData) => {
   try {
     const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
@@ -53,7 +54,7 @@ export const updateExpenseInFirestore = async (expenseId, updatedData) => {
   }
 };
 
-// Function to delete an expense from Firestore
+//DELETE EXPENSES
 export const deleteExpenseFromFirestore = async (expenseId) => {
   try {
     const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
