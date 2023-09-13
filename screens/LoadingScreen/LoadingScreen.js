@@ -29,7 +29,7 @@ const LoadingScreen = () => {
         console.error('Error fetching data: ', error);        
       }
     };
-
+fetchData();
 
 
   return (

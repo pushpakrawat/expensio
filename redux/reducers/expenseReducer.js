@@ -2,6 +2,7 @@ import {
   addExpenseToFirestore,
   updateExpenseInFirestore,
   deleteExpenseFromFirestore,
+  getExpensesFromFirestore,
 } from "../../firebaseUtils";
 import {
   SET_DATA_LOADED,
@@ -23,6 +24,8 @@ import {
   REMOVE_EXPENSE,
   GET_EXPENSES,
 } from "../actionTypes";
+
+import { useNavigation } from "@react-navigation/native";
 
 const currentDate = new Date();
 const initialMonth = currentDate.getMonth() + 1;
@@ -84,10 +87,10 @@ const expenseReducer = (state = initialState, action) => {
     case SET_EXPENSE_DATE:
       return { ...state, expenseEndDate: action.payload };
 
-    case ADD_EXPENSE:
-      // Handle async Firestore operation separately
-      handleFirestoreOperation(addExpenseToFirestore, action.payload);
-      return { ...state, isDataLoaded: false };
+      case ADD_EXPENSE:
+        // Handle async Firestore operation separately
+        handleFirestoreOperation(addExpenseToFirestore, action.payload)
+        return { ...state, isDataLoaded: false };
 
     case ADD_PAID_MONTH:
       const updatedExpensesAfterAdd = state.expenses.map((expense) =>

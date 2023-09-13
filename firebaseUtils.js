@@ -1,6 +1,6 @@
-import { FIREBASE_DB } from './firebaseconfig';
-import { useDispatch } from 'react-redux';
-import { setDataLoaded } from './redux/actions/expenseActions';
+import { FIREBASE_DB } from "./firebaseconfig";
+import { useDispatch } from "react-redux";
+import { setDataLoaded } from "./redux/actions/expenseActions";
 import {
   addDoc,
   collection,
@@ -10,34 +10,33 @@ import {
   setDoc,
   onSnapshot,
   getDocs,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 
 export const getExpensesFromFirestore = async () => {
   try {
-    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses'); 
+    const expensesCollectionRef = collection(FIREBASE_DB, "expenses");
     const querySnapshot = await getDocs(expensesCollectionRef);
     const expenses = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
-    console.log("Firebase Utils - sending expenses: ", expenses)
+    console.log("Firebase Utils - sending expenses: ", expenses);
     return expenses;
   } catch (error) {
-    // Handle errors here
-    console.error('Error fetching expenses from Firestore: ', error);
-    throw error; // Rethrow the error for the caller to handle
+    console.error("Error fetching expenses from Firestore: ", error);
+    throw error;
   }
 };
 
 export const addExpenseToFirestore = async (expense) => {
   console.log("Firebase Utils - expense sent: ", expense);
   try {
-    const expensesCollectionRef = collection(FIREBASE_DB, 'expenses');
-    const docRef = await addDoc(expensesCollectionRef, expense); // Use addDoc to automatically generate a document ID
-    console.log('Expense added successfully to Firestore.');
-    return docRef.id; // Return the ID of the added document
+    const expensesCollectionRef = collection(FIREBASE_DB, "expenses");
+    const docRef = await addDoc(expensesCollectionRef, expense);
+    console.log("Expense added successfully to Firestore.");
+    return docRef.id;
   } catch (error) {
-    console.error('Error adding expense to Firestore: ', error);
+    console.error("Error adding expense to Firestore: ", error);
     throw error;
   }
 };
@@ -45,14 +44,11 @@ export const addExpenseToFirestore = async (expense) => {
 // Function to update an expense in Firestore
 export const updateExpenseInFirestore = async (expenseId, updatedData) => {
   try {
-    const expenseDocRef = doc(FIREBASE_DB, 'expenses', expenseId);
+    const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
     await updateDoc(expenseDocRef, updatedData);
-    console.log('Expense updated successfully in Firestore.');
-
-    // Fetch updated expenses after a successful update
-    // await getExpensesFromFirestore();
+    console.log("Expense updated successfully in Firestore.");
   } catch (error) {
-    console.error('Error updating expense in Firestore: ', error);
+    console.error("Error updating expense in Firestore: ", error);
     throw error;
   }
 };
@@ -60,14 +56,14 @@ export const updateExpenseInFirestore = async (expenseId, updatedData) => {
 // Function to delete an expense from Firestore
 export const deleteExpenseFromFirestore = async (expenseId) => {
   try {
-    const expenseDocRef = doc(FIREBASE_DB, 'expenses', expenseId);
+    const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
     await deleteDoc(expenseDocRef);
-    console.log('Expense deleted successfully from Firestore.');
+    console.log("Expense deleted successfully from Firestore.");
 
     // Fetch updated expenses after a successful deletion
     await getExpensesFromFirestore();
   } catch (error) {
-    console.error('Error deleting expense from Firestore: ', error);
+    console.error("Error deleting expense from Firestore: ", error);
     throw error;
   }
 };
