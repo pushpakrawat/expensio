@@ -1,4 +1,4 @@
-import { FIREBASE_DB } from "./firebaseconfig";
+import { FIREBASE_DB, FIREBASE_AUTH } from "./firebaseconfig";
 import { useDispatch } from "react-redux";
 import { setDataLoaded } from "./redux/actions/expenseActions";
 import {
@@ -11,6 +11,8 @@ import {
   onSnapshot,
   getDocs,
 } from "firebase/firestore";
+
+const auth = FIREBASE_AUTH;
 
 // GET EXPENSES
 export const getExpensesFromFirestore = async () => {
@@ -65,3 +67,6 @@ export const deleteExpenseFromFirestore = async (expenseId) => {
     throw error;
   }
 };
+
+
+

@@ -20,3 +20,11 @@ export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 export const SET_FILTERED_EXPENSES = 'SET_FILTERED_EXPENSES';
 export const GET_EXPENSES = 'GET_EXPENSES';
 
+//Users Actions Types
+
+export const SET_NAME = 'SET_NAME';
+export const SET_EMAIL = 'SET_EMAIL';
+export const SET_PASSWORD = 'SET_PASSWORD';
+
+
+export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';

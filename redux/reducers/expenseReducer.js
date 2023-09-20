@@ -32,6 +32,7 @@ const initialMonth = currentDate.getMonth() + 1;
 const initialYear = currentDate.getFullYear();
 
 const initialState = {
+  refId: '',
   isDataLoaded: false,
   currentMonthName: "",
   currentMonth: initialMonth,

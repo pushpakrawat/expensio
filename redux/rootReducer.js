@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import expenseReducer from './reducers/expenseReducer'; // Adjust the import path
+import expenseReducer from './reducers/expenseReducer'; 
+import userReducer from './reducers/userReducer'
 
 const rootReducer = combineReducers({
   expense: expenseReducer,
-  // Add other reducers here if you have more
+  user: userReducer,
 });
 
 export default rootReducer;

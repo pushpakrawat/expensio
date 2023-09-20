@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'; // Import useNavigatio
 export const useAddExpenseLogic = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation(); 
-  const { title, amount, isRecurring, expenseEndDate, selectedFrequency,selectedDate, selectedMonth, selectedYear, paidMonths } = useSelector(state => state.expense);
+  const { title, amount, isRecurring, expenseEndDate, selectedFrequency,selectedDate, selectedMonth, selectedYear, paidMonths, refId } = useSelector(state => state.expense);
 
 
 
@@ -37,7 +37,7 @@ export const useAddExpenseLogic = () => {
     if (title && amount ) { // Make sure a date is selected
       const newExpense = {
         date: new Date(),
-        // id: generateUniqueId(), // Generate a unique id
+        refId,
         title,
         amount: parseFloat(amount),
         isRecurring,
