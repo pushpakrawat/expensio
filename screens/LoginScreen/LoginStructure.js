@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setEmail, setPassword } from '../../redux/actions/userActions'; // Define Redux actions
-import styles from './LoginStyle'; // Import the styles
-import { useNavigation } from '@react-navigation/native'; // Import navigation hook
-import { loginUser } from './LoginCode';
+import React, { useState } from "react";
+import { View, TextInput, TouchableOpacity, Text, Image } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { setEmail, setPassword } from "../../redux/actions/userActions"; // Define Redux actions
+import styles from "./LoginStyle"; // Import the styles
+import { useNavigation } from "@react-navigation/native"; // Import navigation hook
+import { loginUser } from "./LoginCode";
 
 export const LoginStructure = () => {
   const dispatch = useDispatch();
@@ -15,15 +15,19 @@ export const LoginStructure = () => {
   const handleLogin = () => {
     // Dispatch the login action with email and password
     dispatch(loginUser(email, password, navigation)); // Pass navigation to loginUser
-  }
+  };
 
   const navigateToRegistration = () => {
     // Navigate to the registration screen
-    navigation.navigate('Registration');
-  }
+    navigation.navigate("Registration");
+  };
 
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../../assets/expensio-logo.png")} 
+        style={styles.logo}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -37,16 +41,15 @@ export const LoginStructure = () => {
         onChangeText={(text) => dispatch(setPassword(text))}
         value={password}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogin}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={navigateToRegistration}>
-        <Text style={styles.registerLink}>Not registered yet? Register here</Text>
+      <TouchableOpacity onPress={navigateToRegistration} style={styles.registerLink}>
+        <Text style={styles.registerLink}>
+          Not registered yet? Register here
+        </Text>
       </TouchableOpacity>
     </View>
   );
-}
+};

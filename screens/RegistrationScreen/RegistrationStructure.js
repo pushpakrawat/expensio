@@ -1,10 +1,14 @@
-import React from 'react';
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setName, setEmail, setPassword } from '../../redux/actions/userActions';
-import { registerUser } from './RegistrationCode';
-import { useNavigation } from '@react-navigation/native';
-import styles from './RegistrationStyle'; // Import the styles
+import React from "react";
+import { View, TextInput, TouchableOpacity, Text, Image } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setName,
+  setEmail,
+  setPassword,
+} from "../../redux/actions/userActions";
+import { registerUser } from "./RegistrationCode";
+import { useNavigation } from "@react-navigation/native";
+import styles from "./RegistrationStyle"; // Import the styles
 
 export const RegistrationStructure = () => {
   const dispatch = useDispatch();
@@ -15,10 +19,16 @@ export const RegistrationStructure = () => {
 
   const handleRegistration = () => {
     dispatch(registerUser(email, password, navigation));
-  }
+  };
+
+  const navigateToLogin = () => {
+    // Navigate to the registration screen
+    navigation.navigate("Login");
+  };
 
   return (
     <View style={styles.container}>
+      <Image source={require("../../assets/expensio-logo.png")} style={styles.logo} />
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -32,12 +42,14 @@ export const RegistrationStructure = () => {
         onChangeText={(text) => dispatch(setPassword(text))}
         value={password}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleRegistration}
-      >
+      <TouchableOpacity style={styles.button} onPress={handleRegistration}>
         <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={navigateToLogin} style={styles.loginLink}>
+        <Text style={styles.loginLink}>
+          Already registered? Login here
+        </Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
