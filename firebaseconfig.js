@@ -1,7 +1,9 @@
 import { initializeApp } from 'firebase/app';
-import { initializeAuth, getReactNativePersistence, getAuth } from 'firebase/auth';
-import { getFirestore} from 'firebase/firestore';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -14,24 +16,10 @@ const firebaseConfig = {
 };
 
 export const FIREBASE_APP = initializeApp(firebaseConfig);
-// export const FIREBASE_DB =  getFirestore(FIREBASE_APP, { persistence: true });
-export const FIREBASE_DB =  getFirestore(FIREBASE_APP);
-export const FIREBASE_AUTH = getAuth(FIREBASE_APP)
+export const FIREBASE_DB = getFirestore(FIREBASE_APP);
+export const FIREBASE_AUTH = initializeAuth(FIREBASE_APP, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});
 
-// // Initialize Firebase Auth with persistence
-// const auth = initializeAuth(FIREBASE_APP, {
-//     persistence: getReactNativePersistence(ReactNativeAsyncStorage) // Use getReactNativePersistence
-//   });
-  
-//   // Check if AsyncStorage is available
-//   ReactNativeAsyncStorage.getItem('@firebase:authUser')
-//     .then(() => {
-//       // AsyncStorage is available, set persistence to LOCAL
-//       getReactNativePersistence(auth, 'LOCAL'); // Use 'LOCAL' for persistence
-//     })
-//     .catch(() => {
-//       // AsyncStorage is not available, use default persistence
-//       getReactNativePersistence(auth, 'SESSION'); // Use 'SESSION' for default
-//     });
-  
-//   export const FIREBASE_AUTH = auth;
+export const FIREBASE_PROVIDER = new GoogleAuthProvider();
+

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, TouchableOpacity, Text, Image } from "react-native";
+import { View, TextInput, TouchableOpacity, Text, Image, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setName,
@@ -8,6 +8,7 @@ import {
 } from "../../redux/actions/userActions";
 import { registerUser } from "./RegistrationCode";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithGooglePopup } from '../../firebaseconfig'
 import styles from "./RegistrationStyle"; // Import the styles
 
 export const RegistrationStructure = () => {
@@ -50,6 +51,8 @@ export const RegistrationStructure = () => {
           Already registered? Login here
         </Text>
       </TouchableOpacity>
+      {/* <Button title="Sign up with Google" onPress={signInWithGooglePopup} /> */}
+
     </View>
   );
 };
