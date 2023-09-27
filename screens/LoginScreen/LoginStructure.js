@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, TouchableOpacity, Text, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { setEmail, setPassword } from "../../redux/actions/userActions"; // Define Redux actions
+import { setEmail, setPassword, setUserId } from "../../redux/actions/userActions"; // Define Redux actions
 import styles from "./LoginStyle"; // Import the styles
 import { useNavigation } from "@react-navigation/native"; // Import navigation hook
 import { loginUser } from "./LoginCode";
 import { FIREBASE_AUTH } from "../../firebaseconfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { setExpenseDocId } from "../../redux/actions/expenseActions";
 
 export const LoginStructure = () => {
   const dispatch = useDispatch();
@@ -23,18 +25,18 @@ export const LoginStructure = () => {
     navigation.navigate("Registration");
   };
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
-  //     if (user) {
-  //       dispatch(setUserId(user.uid));
-  //       dispatch(setExpenseDocId(user.uid));
-  //       navigate("Loading");
-  //     }
-  //   });
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      if (user) {
+        dispatch(setUserId(user.uid));
+        dispatch(setExpenseDocId(user.uid));
+        navigation.navigate("Loading");
+      }
+    });
 
-  //   // Remember to unsubscribe when the component unmounts
-  //   return () => unsubscribe();
-  // }, [dispatch]);
+    // Remember to unsubscribe when the component unmounts
+    return () => unsubscribe();
+  }, [dispatch, navigation]);
 
   return (
     <View style={styles.container}>
