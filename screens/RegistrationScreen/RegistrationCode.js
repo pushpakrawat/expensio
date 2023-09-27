@@ -13,7 +13,7 @@ export const registerUser = (email, password, navigation, dispatch) => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = userCredential.user;
 
