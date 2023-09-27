@@ -19,8 +19,8 @@ export const loginUser = (email, password, navigation, dispatch) => {
       
       dispatch(setUserId(user.uid)); 
       dispatch(setExpenseDocId(user.uid));
-      
       navigation.navigate('Loading');
+
     } catch (error) {
       console.error("Login error:", error);
     }
