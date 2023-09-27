@@ -35,9 +35,8 @@ export const registerUser = (email, password, navigation, dispatch) => {
       });
 
       // Create the "userExpenses" subcollection within the user's document
-      const userExpensesCollectionRef = collection(userDocRef, "userExpenses");
-      // const userExpensesDocRef = doc(userExpensesCollectionRef);
-      // await setDoc(userExpensesDocRef, {});
+      collection(userDocRef, "userExpenses");
+
 
       console.log("User registered with ID: ", user.uid);
 

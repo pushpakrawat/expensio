@@ -3,6 +3,7 @@ import { Provider, useDispatch } from "react-redux";
 import AppNavigator from "./navigation/AppNavigator";
 import store from "./redux/store";
 
+
 const App = () => {
   return (
     <Provider store={store}>
