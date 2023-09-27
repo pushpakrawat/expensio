@@ -1,8 +1,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FIREBASE_AUTH } from "../../firebaseconfig";
+import { setUserId } from "../../redux/actions/userActions";
+import { setExpenseDocId } from "../../redux/actions/expenseActions";
 
-
-export const loginUser = (email, password, navigation) => {
+export const loginUser = (email, password, navigation, dispatch) => {
   
   return async () => {
     const auth = FIREBASE_AUTH;
@@ -16,6 +17,10 @@ export const loginUser = (email, password, navigation) => {
       const user = userCredential.user;
       navigation.navigate('Loading');
       console.log("Login successful:", user);
+
+      dispatch(setUserId(user.uid)); 
+      dispatch(setExpenseDocId(user.uid));
+
     } catch (error) {
       console.error("Login error:", error);
     }
