@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, TextInput, TouchableOpacity, Text, Image } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setEmail, setPassword, setUserId } from "../../redux/actions/userActions"; // Define Redux actions
@@ -8,6 +8,9 @@ import { loginUser } from "./LoginCode";
 import { FIREBASE_AUTH } from "../../firebaseconfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { setExpenseDocId } from "../../redux/actions/expenseActions";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { loginSchema } from "../../src/validation/validationSchemas";
 
 export const LoginStructure = () => {
   const dispatch = useDispatch();
@@ -15,8 +18,8 @@ export const LoginStructure = () => {
   const password = useSelector((state) => state.user.password);
   const navigation = useNavigation(); // Initialize navigation
 
-  const handleLogin = () => {
-    // Dispatch the login action with email and password
+  const handleLogin = (values) => {
+    const { email, password } = values;
     dispatch(loginUser(email, password, navigation, dispatch)); // Pass navigation to loginUser
   };
 
@@ -39,33 +42,56 @@ export const LoginStructure = () => {
   }, [dispatch, navigation]);
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("../../assets/expensio-logo.png")} 
-        style={styles.logo}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        onChangeText={(text) => dispatch(setEmail(text))}
-        value={email}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        onChangeText={(text) => dispatch(setPassword(text))}
-        value={password}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+    <Formik
+      initialValues={{ email: "", password: "" }}
+      validationSchema={loginSchema}
+      onSubmit={handleLogin}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+        <View style={styles.container}>
+          <Image
+            source={require("../../assets/expensio-logo.png")}
+            style={styles.logo}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={handleChange("email")}
+            onBlur={handleBlur("email")}
+            value={values.email}
+          />
+          <View style={styles.errorContainer}>
+          {touched.email && errors.email && (
+            <Text style={styles.errorText}>{errors.email}</Text>
+          )}
+          </View>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            onChangeText={handleChange("password")}
+            onBlur={handleBlur("password")}
+            value={values.password}
+          />
+          <View style={styles.errorContainer}>
+          {touched.password && errors.password && (
+            <Text style={styles.errorText}>{errors.password}</Text>
+          )}
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
 
-      <TouchableOpacity onPress={navigateToRegistration} style={styles.registerLink}>
-        <Text style={styles.registerLink}>
-          Not registered yet? Register here
-        </Text>
-      </TouchableOpacity>
-    </View>
+          <TouchableOpacity
+            onPress={navigateToRegistration}
+            style={styles.registerLink}
+          >
+            <Text style={styles.registerLink}>
+              Not registered yet? Register here
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </Formik>
   );
 };

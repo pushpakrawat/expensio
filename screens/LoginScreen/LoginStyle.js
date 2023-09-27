@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     width: '80%',
     marginBottom: 10,
     paddingVertical: 5,
-    paddingLeft:10,
+    paddingLeft: 10,
     borderWidth: 1,
     borderColor: 'transparent',
     backgroundColor: 'white',
@@ -29,9 +29,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '700',
   },
+  errorContainer: {
+     minHeight: 20,
+  },
   errorText: {
-    color: 'red',
-    marginTop: 10,
+    color: 'white',
+    verticalAlign:'middle',
   },
   logo: {
     width: 200, 
@@ -39,10 +42,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   registerLink: {
-    marginTop:10,
+    marginTop: 10,
     color: 'white',
-
-  }
+  },
 });
 
 export default styles;
