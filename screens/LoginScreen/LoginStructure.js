@@ -14,7 +14,7 @@ export const LoginStructure = () => {
 
   const handleLogin = () => {
     // Dispatch the login action with email and password
-    dispatch(loginUser(email, password, navigation)); // Pass navigation to loginUser
+    dispatch(loginUser(email, password, navigation, dispatch)); // Pass navigation to loginUser
   };
 
   const navigateToRegistration = () => {

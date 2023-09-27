@@ -1,41 +1,53 @@
-// RegistrationCode.js
-import { signInWithPopup} from "firebase/auth";
-import { FIREBASE_AUTH, FIREBASE_PROVIDER  } from "../../firebaseconfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, collection, setDoc } from "firebase/firestore";
+import { FIREBASE_AUTH, FIREBASE_DB } from "../../firebaseconfig";
+import { setUserId } from "../../redux/actions/userActions";
+import { setExpenseDocId } from "../../redux/actions/expenseActions";
 
 const auth = FIREBASE_AUTH;
-const provider = FIREBASE_PROVIDER;
 
-export const signInWithGooglePopup = async () => {
-  try {
-    // Trigger Google Sign-In popup
-    const result = await signInWithPopup(auth, provider);
-
-    // You can access user information from the result object if needed
-    const user = result.user;
-
-    // Handle successful login (e.g., update state or navigate to the next screen)
-    console.log('Logged in with Google:', user);
-  } catch (error) {
-    // Handle errors (e.g., display an error message to the user)
-    console.error('Google Sign-In Error:', error.message);
-  }
-};
-
-export const registerUser = (email, password, navigation) => {
+export const registerUser = (email, password, navigation, dispatch) => {
   return async () => {
     try {
-      const userDocId = await createUserWithEmailAndPassword(
+      // Register the user
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      console.log("User registered with ID: ", userDocId);
-      navigation.navigate('Loading');
+      const user = userCredential.user;
+
+      // Create a reference to the "users" collection
+      const usersCollectionRef = collection(FIREBASE_DB, "users");
+
+      // Add a document to the "users" collection with user's UID as the document ID
+      const userDocRef = doc(usersCollectionRef, user.uid);
+      await setDoc(userDocRef, {});
+
+      // Create the "userData" subcollection within the user's document
+      const userDataCollectionRef = collection(userDocRef, "userData");
+      const userDataDocRef = doc(userDataCollectionRef);
+
+      // Add the email to the "userData" subcollection
+      await setDoc(userDataDocRef, {
+        email: user.email,
+        // Add other user data as needed
+      });
+
+      // Create the "userExpenses" subcollection within the user's document
+      const userExpensesCollectionRef = collection(userDocRef, "userExpenses");
+      // const userExpensesDocRef = doc(userExpensesCollectionRef);
+      // await setDoc(userExpensesDocRef, {});
+
+      console.log("User registered with ID: ", user.uid);
+
+      // Dispatch actions to update the Redux states with user and expense document IDs
+      dispatch(setUserId(user.uid)); 
+      dispatch(setExpenseDocId(user.uid));
+
+      navigation.navigate("Loading");
     } catch (error) {
       console.error("Error registering user: ", error);
     }
   };
 };
-
-

@@ -9,13 +9,14 @@ const LoadingScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isDataLoaded = useSelector((state) => state.expense.isDataLoaded);
+  const userId = useSelector((state) => state.expense.expenseDocId);
 
   useEffect(() => {
     const fetchData = async () => {
       
       console.log("Loading Screen: Fetching data...")
       try {
-        const expensesData = await getExpensesFromFirestore();
+        const expensesData = await getExpensesFromFirestore(userId);
         const expenses = expensesData.map((expense) => ({
           ...expense,
           date: new Date(expense.date.seconds * 1000),
@@ -36,7 +37,7 @@ const LoadingScreen = () => {
     if (!isDataLoaded) {
       fetchData();
     }
-  }, [dispatch, isDataLoaded, navigation]);
+  }, [dispatch, isDataLoaded, navigation, userId]);
 
   return (
     <ImageBackground

@@ -6,9 +6,8 @@ import {
   setEmail,
   setPassword,
 } from "../../redux/actions/userActions";
-import { registerUser } from "./RegistrationCode";
+import { registerUser, handleGoogleSignin } from "./RegistrationCode";
 import { useNavigation } from "@react-navigation/native";
-import { signInWithGooglePopup } from '../../firebaseconfig'
 import styles from "./RegistrationStyle"; // Import the styles
 
 export const RegistrationStructure = () => {
@@ -19,7 +18,7 @@ export const RegistrationStructure = () => {
   const password = useSelector((state) => state.user.password);
 
   const handleRegistration = () => {
-    dispatch(registerUser(email, password, navigation));
+    dispatch(registerUser(email, password, navigation, dispatch));
   };
 
   const navigateToLogin = () => {
@@ -51,7 +50,6 @@ export const RegistrationStructure = () => {
           Already registered? Login here
         </Text>
       </TouchableOpacity>
-      {/* <Button title="Sign up with Google" onPress={signInWithGooglePopup} /> */}
 
     </View>
   );

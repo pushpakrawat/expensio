@@ -1,24 +1,24 @@
-import { FIREBASE_DB, FIREBASE_AUTH } from "./firebaseconfig";
-import { useDispatch } from "react-redux";
-import { setDataLoaded } from "./redux/actions/expenseActions";
+import { FIREBASE_DB } from "./firebaseconfig";
 import {
   addDoc,
   collection,
   doc,
   updateDoc,
   deleteDoc,
-  setDoc,
-  onSnapshot,
   getDocs,
 } from "firebase/firestore";
 
-const auth = FIREBASE_AUTH;
+const getUserExpensesCollectionRef = (userId) => {
+  const db = FIREBASE_DB;
+  const userDocRef = doc(db, "users", userId);
+  return collection(userDocRef, "userExpenses");
+};
 
 // GET EXPENSES
-export const getExpensesFromFirestore = async () => {
+export const getExpensesFromFirestore = async (userId) => {
   try {
-    const expensesCollectionRef = collection(FIREBASE_DB, "expenses");
-    const querySnapshot = await getDocs(expensesCollectionRef);
+    const userExpensesCollectionRef = getUserExpensesCollectionRef(userId);
+    const querySnapshot = await getDocs(userExpensesCollectionRef);
     const expenses = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -31,11 +31,11 @@ export const getExpensesFromFirestore = async () => {
   }
 };
 // ADD EXPENSES
-export const addExpenseToFirestore = async (expense) => {
+export const addExpenseToFirestore = async (expense, userId) => {
   console.log("Firebase Utils - expense sent: ", expense);
   try {
-    const expensesCollectionRef = collection(FIREBASE_DB, "expenses");
-    const docRef = await addDoc(expensesCollectionRef, expense);
+    const userExpensesCollectionRef = getUserExpensesCollectionRef(userId);
+    const docRef = await addDoc(userExpensesCollectionRef, expense);
     console.log("Expense added successfully to Firestore.");
     return docRef.id;
   } catch (error) {
@@ -45,9 +45,10 @@ export const addExpenseToFirestore = async (expense) => {
 };
 
 //UPDATE EXPENSES
-export const updateExpenseInFirestore = async (expenseId, updatedData) => {
+export const updateExpenseInFirestore = async (expenseId, updatedData, userId) => {
   try {
-    const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
+    const userExpensesCollectionRef = getUserExpensesCollectionRef(userId);
+    const expenseDocRef = doc(userExpensesCollectionRef, expenseId);
     await updateDoc(expenseDocRef, updatedData);
     console.log("Expense updated successfully in Firestore.");
   } catch (error) {
@@ -57,9 +58,10 @@ export const updateExpenseInFirestore = async (expenseId, updatedData) => {
 };
 
 //DELETE EXPENSES
-export const deleteExpenseFromFirestore = async (expenseId) => {
+export const deleteExpenseFromFirestore = async (expenseId, userId) => {
   try {
-    const expenseDocRef = doc(FIREBASE_DB, "expenses", expenseId);
+    const userExpensesCollectionRef = getUserExpensesCollectionRef(userId);
+    const expenseDocRef = doc(userExpensesCollectionRef, expenseId);
     await deleteDoc(expenseDocRef);
     console.log("Expense deleted successfully from Firestore.");
   } catch (error) {

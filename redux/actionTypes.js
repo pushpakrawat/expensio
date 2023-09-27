@@ -19,12 +19,13 @@ export const REMOVE_PAID_MONTH = 'REMOVE_PAID_MONTH';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 export const SET_FILTERED_EXPENSES = 'SET_FILTERED_EXPENSES';
 export const GET_EXPENSES = 'GET_EXPENSES';
-
+export const SET_EXPENSEDOC_ID = 'SET_EXPENSEDOC_ID';
 //Users Actions Types
 
 export const SET_NAME = 'SET_NAME';
 export const SET_EMAIL = 'SET_EMAIL';
 export const SET_PASSWORD = 'SET_PASSWORD';
+export const SET_USER_ID = 'SET_USER_ID';
 
 
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';

@@ -18,6 +18,7 @@ import {
   REMOVE_PAID_MONTH,
   REMOVE_EXPENSE,
   GET_EXPENSES,
+  SET_EXPENSEDOC_ID,
 } from "../actionTypes"; 
 
 // Other action creators
@@ -40,3 +41,9 @@ export const removePaidMonth = ({ expenseId, month, year }) => ({ type: REMOVE_P
 export const setFilteredExpenses = (filteredExpenses) => ({ type: SET_FILTERED_EXPENSES, payload: filteredExpenses });
 export const removeExpense = (expenseId) => ({ type: REMOVE_EXPENSE, payload: { expenseId } });
 export const getExpenses = (expenses) => {  return {    type: GET_EXPENSES,    payload: expenses,  };};
+export const setExpenseDocId = (expenseDocId) => {
+  return {
+    type: SET_EXPENSEDOC_ID,
+    payload: expenseDocId,
+  };
+};

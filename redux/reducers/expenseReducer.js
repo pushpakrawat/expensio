@@ -2,7 +2,6 @@ import {
   addExpenseToFirestore,
   updateExpenseInFirestore,
   deleteExpenseFromFirestore,
-  getExpensesFromFirestore,
 } from "../../firebaseUtils";
 import {
   SET_DATA_LOADED,
@@ -23,16 +22,16 @@ import {
   SET_FILTERED_EXPENSES,
   REMOVE_EXPENSE,
   GET_EXPENSES,
+  SET_EXPENSEDOC_ID,
 } from "../actionTypes";
-
-import { useNavigation } from "@react-navigation/native";
 
 const currentDate = new Date();
 const initialMonth = currentDate.getMonth() + 1;
 const initialYear = currentDate.getFullYear();
 
 const initialState = {
-  refId: '',
+  refId: "",
+  expenseDocId: null,
   isDataLoaded: false,
   currentMonthName: "",
   currentMonth: initialMonth,
@@ -89,8 +88,11 @@ const expenseReducer = (state = initialState, action) => {
       return { ...state, expenseEndDate: action.payload };
 
     case ADD_EXPENSE:
-      handleFirestoreOperation(addExpenseToFirestore, action.payload);
+      handleFirestoreOperation(addExpenseToFirestore, action.payload, state.expenseDocId);
       return { ...state, isDataLoaded: false };
+
+    case SET_EXPENSEDOC_ID:
+      return { ...state, expenseDocId: action.payload };
 
     case ADD_PAID_MONTH:
       const updatedExpensesAfterAdd = state.expenses.map((expense) =>
@@ -107,7 +109,7 @@ const expenseReducer = (state = initialState, action) => {
         paidMonths: updatedExpensesAfterAdd.find(
           (expense) => expense.id === action.payload.expenseId
         ).paidMonths, // Get the updated paidMonths array
-      });
+      }, state.expenseDocId);
 
       return {
         ...state,
@@ -133,13 +135,13 @@ const expenseReducer = (state = initialState, action) => {
         paidMonths: updatedExpensesAfterRemove.find(
           (expense) => expense.id === action.payload.expenseId
         ).paidMonths, // Get the updated paidMonths array
-      });
+      }, state.expenseDocId);
 
       return {
         ...state,
         expenses: updatedExpensesAfterRemove,
       };
-      
+
     case SET_FILTERED_EXPENSES:
       return { ...state, filteredExpenses: action.payload };
 
@@ -147,7 +149,8 @@ const expenseReducer = (state = initialState, action) => {
       console.log("Deleting Expense");
       handleFirestoreOperation(
         deleteExpenseFromFirestore,
-        action.payload.expenseId
+        action.payload.expenseId, 
+        state.expenseDocId
       );
       return { ...state, isDataLoaded: false };
 
@@ -161,9 +164,9 @@ const expenseReducer = (state = initialState, action) => {
 };
 
 // Helper function to handle async Firestore operations
-const handleFirestoreOperation = async (operation, payload) => {
+const handleFirestoreOperation = async (operation, payload, expenseDocId) => {
   try {
-    await operation(payload);
+    await operation(payload, expenseDocId);
   } catch (error) {
     console.error("Error performing Firestore operation: ", error);
   }

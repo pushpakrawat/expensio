@@ -3,6 +3,7 @@ import {
     SET_EMAIL,
     SET_PASSWORD,
     REGISTER_USER_SUCCESS,
+    SET_USER_ID,
   } from "../actionTypes"; 
   
 export const setName = (name) => {
@@ -30,3 +31,10 @@ export const registerUserSuccess = (userId) => ({
   type: REGISTER_USER_SUCCESS,
   payload: userId,
 });
+
+export const setUserId = (userId) => {
+  return {
+    type: SET_USER_ID,
+    payload: userId,
+  };
+};

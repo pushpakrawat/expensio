@@ -1,11 +1,17 @@
-import { SET_NAME, SET_EMAIL, SET_PASSWORD, REGISTER_USER_SUCCESS } from "../actionTypes";
+import {
+  SET_NAME,
+  SET_EMAIL,
+  SET_PASSWORD,
+  REGISTER_USER_SUCCESS,
+  SET_USER_ID,
+} from "../actionTypes";
 
 const initialState = {
   name: "",
   email: "",
   password: "",
   isRegistered: false,
-  userId: null, 
+  userId: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -35,6 +41,12 @@ const userReducer = (state = initialState, action) => {
         userId: action.payload,
       };
 
+    case SET_USER_ID:
+      return {
+        ...state,
+        userId: action.payload,
+      };
+      
     default:
       return state;
   }
