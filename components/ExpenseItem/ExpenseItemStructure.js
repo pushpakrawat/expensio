@@ -7,6 +7,7 @@ import MarkPaidButton from "../smallComponents/MarkPaidButton";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icons from "react-native-vector-icons/Entypo";
 import Icon3 from "react-native-vector-icons/Fontisto";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const ExpenseItemStructure = ({ expense }) => {
   const navigation = useNavigation();
@@ -21,28 +22,31 @@ const ExpenseItemStructure = ({ expense }) => {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.amount}>₹{amount}</Text>
         </View>
-        <View style={styles.secondBox}>
-          <Icons
-            name="cycle"
-            size={18}
-            color={isRecurring ? "#f5d442" : "#ccc"}
-          />
-        </View>
-        <View style={styles.thirdBox}>
-          <Text style={styles.dueDate}>
-            <Icon3 name="date" size={15} color="red"/> {formattedDueDate}
-          </Text>
-        </View>
-        <View style={styles.fourthBox}>
-          <TouchableOpacity
-            style={styles.deleteButton}
-            onPress={() => confirmDelete(expense.id)}
-          >
-            <Icon name="trash" size={18} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.fifthBox}>
-          <MarkPaidButton expense={expense} style={styles.markPaidButton} />
+        <View style={styles.container2}>
+          <View style={styles.secondBox}>
+            <Icons
+              name="cycle"
+              size={18}
+              color={isRecurring ? "#f5d442" : "#ccc"}
+            />
+          </View>
+
+          <View style={styles.thirdBox}>
+            <Text style={styles.dueDate}>
+              <Icon3 name="date" size={15} color="red" /> {formattedDueDate}
+            </Text>
+          </View>
+          <View style={styles.fourthBox}>
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => confirmDelete(expense.id)}
+            >
+              <AntDesign name="closecircle" size={20} color="black" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.fifthBox}>
+            <MarkPaidButton expense={expense} style={styles.markPaidButton} />
+          </View>
         </View>
       </View>
     </View>

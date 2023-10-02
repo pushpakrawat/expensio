@@ -57,7 +57,7 @@ const MarkPaidButton = ({ expense }) => {
       <Feather
         name={localIsPaid ? "check-circle" : "check-circle"}
         size={35} // Reduced the icon size
-        color={localIsPaid ? "grey" : "#f5d442"}
+        color={localIsPaid ? "#c9c9c9" : "#f5d442"}
         
       />
       

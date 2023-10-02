@@ -4,8 +4,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     marginHorizontal: 10,
-    marginVertical: 8,
-    borderRadius: 16,
+    marginVertical: 4,
+    borderRadius: 5,
     padding: 20,
     width: "95%",
     shadowColor: "#000",
@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
   },
+  container2: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   header: {
     flexDirection: "row",
     // alignItems: "center",
@@ -24,7 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   title: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "bold",
     color: "#333",
   },
@@ -41,23 +45,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     verticalAlign: 'middle', 
+    marginHorizontal:20,
   },
   thirdBox: {
     flexDirection: "row",
     alignItems: "center",
     verticalAlign: 'middle', 
+    marginHorizontal:10,
   },
   fourthBox: {
     flexDirection: "row",
-    marginBottom: 12,
+    marginBottom: 8,
     // alignItems: "center",
     // verticalAlign: 'middle', 
     // justifyContent:'center',
+    marginHorizontal:10,
   },
   fifthBox: {
     flexDirection: "row",
     alignItems: "center",
     verticalAlign: 'middle', 
+    marginHorizontal:10,
   },
   amount: {
     fontSize: 16,
