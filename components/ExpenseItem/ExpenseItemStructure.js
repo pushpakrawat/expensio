@@ -4,7 +4,9 @@ import { View, Text, TouchableOpacity, Alert } from "react-native"; // Import Al
 import { useExpenseItemLogic, confirmDelete } from "./ExpenseItemCode";
 import styles from "./ExpenseItemStyle";
 import MarkPaidButton from "../smallComponents/MarkPaidButton";
-import Icon from "react-native-vector-icons/FontAwesome"; // Adjust the icon library and name as needed
+import Icon from "react-native-vector-icons/FontAwesome";
+import Icons from "react-native-vector-icons/Entypo";
+import Icon3 from "react-native-vector-icons/Fontisto";
 
 const ExpenseItemStructure = ({ expense }) => {
   const navigation = useNavigation();
@@ -14,26 +16,35 @@ const ExpenseItemStructure = ({ expense }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.amount}>Amount: {amount}</Text>
-      <Text style={styles.recurring}>
-        {isRecurring ? "Recurring" : "Non-Recurring"}
-      </Text>
-      <Text style={styles.date}>Created on: {formattedDate}</Text>
-      <Text>Due date: {formattedDueDate}</Text>
-      <MarkPaidButton expense={expense} />
-
-      <TouchableOpacity
-        style={styles.deleteButton}
-        onPress={() => confirmDelete(expense.id)}
-      >
-        <Icon name="trash" size={26} color="black" />
-      </TouchableOpacity>
-
-      {/* <TouchableOpacity style={styles.editButton} onPress={() => console.log('Edit pressed')}>
-        <Icon name="pencil" size={20} color="black" />
-        <Text>Edit</Text>
-      </TouchableOpacity> */}
+      <View style={styles.header}>
+        <View style={styles.firstBox}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.amount}>₹{amount}</Text>
+        </View>
+        <View style={styles.secondBox}>
+          <Icons
+            name="cycle"
+            size={18}
+            color={isRecurring ? "#f5d442" : "#ccc"}
+          />
+        </View>
+        <View style={styles.thirdBox}>
+          <Text style={styles.dueDate}>
+            <Icon3 name="date" size={15} color="red"/> {formattedDueDate}
+          </Text>
+        </View>
+        <View style={styles.fourthBox}>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => confirmDelete(expense.id)}
+          >
+            <Icon name="trash" size={18} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.fifthBox}>
+          <MarkPaidButton expense={expense} style={styles.markPaidButton} />
+        </View>
+      </View>
     </View>
   );
 };

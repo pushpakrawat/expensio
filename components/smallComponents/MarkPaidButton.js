@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { Feather } from "@expo/vector-icons";
+import Feather from "react-native-vector-icons/FontAwesome";
 import {
   addPaidMonth,
   removePaidMonth,
@@ -55,44 +55,30 @@ const MarkPaidButton = ({ expense }) => {
       style={[styles.button, localIsPaid && styles.buttonHighlighted]}
     >
       <Feather
-        name={localIsPaid ? "check-circle" : "circle"}
-        size={24}
-        color={localIsPaid ? "black" : "black"}
-        style={styles.icon}
+        name={localIsPaid ? "check-circle" : "check-circle"}
+        size={35} // Reduced the icon size
+        color={localIsPaid ? "grey" : "#f5d442"}
+        
       />
-      <Text style={[styles.label, localIsPaid && styles.labelHighlighted]}>
-        {localIsPaid ? "Mark as Unpaid" : "Mark as Paid"}
-      </Text>
+      
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    flexDirection: "row",
-    alignItems: "center",
+    // width: 30, 
+    // height: 30, 
     backgroundColor: "white",
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderWidth: 1,
-    borderColor: "black",
-    marginVertical: 10,
+    borderRadius: 25, 
   },
   buttonHighlighted: {
-    backgroundColor: "#f5d442",
-    borderColor: "#f5d442",
+    // backgroundColor: "#f5d442",
+    // borderColor: "#f5d442",
+    // width: 20, 
+    // height: 20,
   },
   icon: {
-    marginRight: 5,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "500", // Changed from numeric to string
-    color: "black",
-  },
-  labelHighlighted: {
-    color: "black",
   },
 });
 

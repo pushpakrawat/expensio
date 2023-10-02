@@ -12,8 +12,8 @@ const HomeStructure = () => {
   return (
     <View style={styles.container}>
       <MonthYearSelectorStructure />
-      <ExpenseListStructure />
       <ExpenseSummary />
+      <ExpenseListStructure />
       <AddExpenseButtonStructure />
     </View>
   );

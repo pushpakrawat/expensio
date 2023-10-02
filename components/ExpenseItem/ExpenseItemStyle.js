@@ -3,47 +3,77 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    margin: 10,
-    padding: 16,
+    marginHorizontal: 10,
     marginVertical: 8,
     borderRadius: 16,
-    width: "95%", // Make it wider to the screen
+    padding: 20,
+    width: "95%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  header: {
+    flexDirection: "row",
+    // alignItems: "center",
+    justifyContent: "space-between", // Align items to the right
+    marginBottom: 0,
   },
   title: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
-    marginBottom: 4,
-  },
-  amount: {
-    fontSize: 16,
-    marginBottom: 4,
+    color: "#333",
   },
   recurring: {
     fontSize: 14,
-    marginBottom: 4,
     color: "gray",
   },
-  date: {
-    fontSize: 14,
-    color: "gray",
+  firstBox: {
+    // flexDirection: "row",
+    // alignItems: "center",
+    // justifyContent: "space-between",
   },
-  editButton: {
+  secondBox: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    verticalAlign: 'middle', 
+  },
+  thirdBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    verticalAlign: 'middle', 
+  },
+  fourthBox: {
+    flexDirection: "row",
+    marginBottom: 12,
+    // alignItems: "center",
+    // verticalAlign: 'middle', 
+    // justifyContent:'center',
+  },
+  fifthBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    verticalAlign: 'middle', 
+  },
+  amount: {
+    fontSize: 16,
+    color: "#333",
+    marginRight: 10, // Adjust spacing
+  },
+  date: {
+    fontSize: 12,
+    color: "grey",
+    flex: 1, 
   },
   deleteButton: {
-    position: "absolute",
-    top: 18,
-    right: 20,
+    alignSelf: "flex-end",
+  },
+  markPaidButton: {
+    alignSelf: "flex-end",
   },
 });
 

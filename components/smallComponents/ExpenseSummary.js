@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 
 const ExpenseSummary = () => {
   const expenses = useSelector((state) => state.expense.filteredExpenses);
-  const currentMonth = useSelector((state) => state.expense.currentMonth)+1;
+  const currentMonth = useSelector((state) => state.expense.currentMonth) + 1;
   const currentYear = useSelector((state) => state.expense.currentYear);
 
   // Calculate total paid and total unpaid amounts
   let totalPaidAmount = 0;
   let totalUnpaidAmount = 0;
+  let totalAmount = 0;
 
   expenses.forEach((expense) => {
     // Check if the expense is paid for the current month and year
@@ -24,6 +25,9 @@ const ExpenseSummary = () => {
       // If the expense is not paid, add its amount to the total unpaid amount
       totalUnpaidAmount += expense.amount;
     }
+
+    // Add the expense amount to the total amount
+    totalAmount += expense.amount;
   });
 
   const totalExpenses = expenses.length;
@@ -31,7 +35,7 @@ const ExpenseSummary = () => {
   return (
     <View style={summaryStyles.summaryContainer}>
       <Text style={summaryStyles.summaryText}>
-        Total: {totalExpenses} | Paid: {totalPaidAmount} | Unpaid: {totalUnpaidAmount}
+        Total: {totalExpenses} | Paid: {totalPaidAmount} | Unpaid: {totalUnpaidAmount} | Total Amount: {totalAmount}
       </Text>
     </View>
   );
@@ -40,18 +44,14 @@ const ExpenseSummary = () => {
 const summaryStyles = StyleSheet.create({
   summaryContainer: {
     backgroundColor: "#F5F5F5",
-    padding: 10,
+    padding: 5,
     borderTopWidth: 1,
     borderTopColor: "#E0E0E0",
     alignItems: "center",
     justifyContent: "center",
-    position: "absolute",
-    bottom: 70,
-    left: 0,
-    right: 0,
   },
   summaryText: {
-    fontSize: 16,
+    fontSize: 12,
     color: "#333",
   },
 });
