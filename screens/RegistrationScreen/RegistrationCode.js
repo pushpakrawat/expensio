@@ -44,7 +44,7 @@ export const registerUser = (email, password, navigation, dispatch) => {
       dispatch(setUserId(user.uid)); 
       dispatch(setExpenseDocId(user.uid));
 
-      navigation.navigate("Loading");
+      navigation.navigate('TabNavigator');
     } catch (error) {
       console.error("Error registering user: ", error);
     }

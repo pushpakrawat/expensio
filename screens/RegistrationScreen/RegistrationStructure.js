@@ -8,7 +8,7 @@ import styles from "./RegistrationStyle"; // Import the styles
 import { Formik } from "formik";
 import { registrationSchema } from "../../src/validation/validationSchemas"; // Import the registration schema
 
-export const RegistrationStructure = () => {
+const RegistrationStructure = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const email = useSelector((state) => state.user.email);
@@ -78,3 +78,5 @@ export const RegistrationStructure = () => {
     </Formik>
   );
 };
+
+export default RegistrationStructure;

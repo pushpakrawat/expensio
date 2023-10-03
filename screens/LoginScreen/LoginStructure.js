@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { loginSchema } from "../../src/validation/validationSchemas";
 
-export const LoginStructure = () => {
+const LoginStructure = () => {
   const dispatch = useDispatch();
   const email = useSelector((state) => state.user.email);
   const password = useSelector((state) => state.user.password);
@@ -95,3 +95,5 @@ export const LoginStructure = () => {
     </Formik>
   );
 };
+
+export default LoginStructure;
