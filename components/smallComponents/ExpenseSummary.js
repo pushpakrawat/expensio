@@ -43,7 +43,7 @@ const ExpenseSummary = () => {
 
 const summaryStyles = StyleSheet.create({
   summaryContainer: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "white",
     padding: 5,
     borderTopWidth: 1,
     borderTopColor: "#E0E0E0",
