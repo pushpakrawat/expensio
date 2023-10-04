@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#42b3f5',
+    backgroundColor: '#637aff',
     marginTop: 30,
   },
   button: {

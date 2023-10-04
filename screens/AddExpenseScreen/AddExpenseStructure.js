@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsRecurring } from "../../redux/actions/expenseActions";
 import NonRecurringExpenseStructure from "../../components/NonRecurringExpense/NonRecurringExpenseStructure";
 import RecurringExpenseStructure from "../../components/RecurringExpense/RecurringExpenseStructure";
+import colors from "../../constants/colors";
 
 const AddExpenseStructure = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,6 @@ const AddExpenseStructure = () => {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}> 
       <View style={styles.container}>
-        <Text style={styles.title}>Add Expense</Text>
         <TextInput
           style={styles.input}
           placeholder="Title"
@@ -39,7 +39,7 @@ const AddExpenseStructure = () => {
         <View style={styles.buttonContainer}>
           <View style={styles.buttonWrapper}>
             <Button
-              color={isRecurring === true ? "#f5d442" : "#42b3f5"}
+              color={isRecurring === true ? colors.primaryDark : colors.primary}
               style={styles.button}
               title="Recurring"
               onPress={() => dispatch(setIsRecurring(true))}
@@ -47,7 +47,7 @@ const AddExpenseStructure = () => {
           </View>
           <View style={styles.buttonWrapper}>
             <Button
-              color={isRecurring === false ? "#f5d442" : "#42b3f5"}
+              color={isRecurring === false ? colors.primaryDark : colors.primary}
               style={styles.button}
               title="One Time"
               onPress={() => dispatch(setIsRecurring(false))}
@@ -59,7 +59,7 @@ const AddExpenseStructure = () => {
 
         <View style={styles.submitButtonWrapper}>
           <Button
-            color="#42b3f5"
+            color={colors.primary}
             title="Submit"
             onPress={() => handleAddExpense()}
           />

@@ -3,6 +3,7 @@ import { View, Text, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setExpenseDate } from "../../redux/actions/expenseActions";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import colors from "../../constants/colors";
 
 export default function DateMonthYearPicker() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export default function DateMonthYearPicker() {
           }}
         >
           <Button
-            color="#42b3f5"
+            color={colors.primary}
             title="Select Date"
             onPress={() => setShowDatePicker(true)}
             disabled={showDatePicker}
@@ -65,7 +66,7 @@ export default function DateMonthYearPicker() {
               }}
             >
               <Button
-                color="#42b3f5"
+                color={colors.primary}
                 title="Edit Date"
                 onPress={() => setShowDatePicker(true)}
               />
@@ -78,7 +79,7 @@ export default function DateMonthYearPicker() {
               }}
             >
               <Button
-                color="#42b3f5"
+                color={colors.primary}
                 title="Remove Date"
                 onPress={handleRemoveEndDate}
               />
