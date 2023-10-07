@@ -6,6 +6,7 @@ import Colors from "../constants/colors";
 import * as Animatable from "react-native-animatable";
 import HomeCode from "../screens/HomeScreen/HomeCode";
 import AddExpenseStructure from "../screens/AddExpenseScreen/AddExpenseStructure";
+import OptionsScreen from '../screens/Options Screen/OptionsStructure'
 
 const TabArr = [
   {
@@ -22,6 +23,13 @@ const TabArr = [
     type: Icons.Feather,
     icon: "plus-square",
     component: AddExpenseStructure,
+  },
+  {
+    route: "Options",
+    label: "Options",
+    type: Icons.Feather,
+    icon: "grid",
+    component: OptionsScreen,
   },
 ];
 
