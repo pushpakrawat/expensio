@@ -6,6 +6,7 @@ import styles from "./ExpenseListStyle";
 
 const ExpenseListStructure = () => { // Pass currentMonth and currentYear as props
   const filteredExpenses = useExpenseListCode(); // Use the hook
+  console.log('filtered expense: ', filteredExpenses);
 
   return (
     <View style={styles.container}>
