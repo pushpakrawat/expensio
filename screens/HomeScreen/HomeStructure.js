@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, ScrollView, FlatList } from "react-native";
 import MonthYearSelectorStructure from "../../components/MonthYearSelector/MonthYearSelectorStructure";
 import ExpenseListStructure from "../../components/ExpenseList/ExpenseListStructure";
@@ -8,6 +8,8 @@ import { BackHandler } from "react-native";
 import HSgraph from "../../components/smallComponents/HSgraph";
 
 const HomeStructure = () => {
+  const [showHSgraph, setShowHSgraph] = useState(false);
+
   useEffect(() => {
     const backAction = () => {
       BackHandler.exitApp(); // Close the app when the back button is pressed
@@ -22,12 +24,15 @@ const HomeStructure = () => {
     return () => backHandler.remove(); // Clean up the event listener when the component unmounts
   }, []);
 
-  
+  setTimeout(() => {
+    setShowHSgraph(true);
+  }, 2000);
+
   const data = [
-    { key: 'HSgraph', component: <HSgraph /> },
-    { key: 'MonthYearSelector', component: <MonthYearSelectorStructure /> },
-    { key: 'ExpenseSummary', component: <ExpenseSummary /> },
-    { key: 'ExpenseList', component: <ExpenseListStructure /> },
+    { key: "HSgraph", component: showHSgraph ? <HSgraph /> : null },
+    { key: "MonthYearSelector", component: <MonthYearSelectorStructure /> },
+    { key: "ExpenseSummary", component: <ExpenseSummary /> },
+    { key: "ExpenseList", component: <ExpenseListStructure /> },
   ];
 
   return (
@@ -37,6 +42,6 @@ const HomeStructure = () => {
       keyExtractor={(item) => item.key}
     />
   );
-}
+};
 
 export default HomeStructure;
