@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    marginHorizontal: 10,
-    marginVertical: 4,
-    borderRadius: 10,
+    marginHorizontal: 0,
+    marginVertical: 2,
+    borderRadius: 0,
     paddingHorizontal: 15,
     paddingVertical: 15,
-    width: "95%",
+    width: "100%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

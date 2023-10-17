@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { View, ScrollView, FlatList } from "react-native";
 import MonthYearSelectorStructure from "../../components/MonthYearSelector/MonthYearSelectorStructure";
 import ExpenseListStructure from "../../components/ExpenseList/ExpenseListStructure";
 import ExpenseSummary from "../../components/smallComponents/ExpenseSummary";
 import styles from "./HomeStyle";
 import { BackHandler } from "react-native";
+import HSgraph from "../../components/smallComponents/HSgraph";
 
 const HomeStructure = () => {
   useEffect(() => {
@@ -22,14 +23,20 @@ const HomeStructure = () => {
   }, []);
 
   
+  const data = [
+    { key: 'HSgraph', component: <HSgraph /> },
+    { key: 'MonthYearSelector', component: <MonthYearSelectorStructure /> },
+    { key: 'ExpenseSummary', component: <ExpenseSummary /> },
+    { key: 'ExpenseList', component: <ExpenseListStructure /> },
+  ];
 
   return (
-    <View style={styles.container}>
-      <MonthYearSelectorStructure />
-      <ExpenseSummary />
-      <ExpenseListStructure />
-    </View>
+    <FlatList
+      data={data}
+      renderItem={({ item }) => item.component}
+      keyExtractor={(item) => item.key}
+    />
   );
-};
+}
 
 export default HomeStructure;

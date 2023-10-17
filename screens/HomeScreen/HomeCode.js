@@ -14,7 +14,7 @@ const HomeCode = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Loading Screen: Fetching data...");
+      console.log("Home Screen: Fetching data...");
       try {
         const expensesData = await getExpensesFromFirestore(userId);
         const expenses = expensesData.map((expense) => ({
